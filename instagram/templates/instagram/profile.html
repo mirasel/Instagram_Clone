@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block title%}{{user_details.username}}{%endblock%}
+{%block profilephoto%} {{profile.profile_pic.url}} {%endblock%}
+{%block body%}
+    {%if profile.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
+        <img src="{{profile.profile_pic.url}}" alt="" height="200px" width="200px"/>
+        <button id="cng">Change profile picture</button>
+        <button id="rmv">Remove profile picture</button>
+    {%else%}
+        <img id="p_pic"src="{{profile.profile_pic.url}}" alt="" height="200px" width="200px" style="cursor: pointer;"/>
+    {%endif%}
+    <form method="POST" id="pp_form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="propic" style="display: none !important;">
+    </form>
+    <h2>{{user_details.username}}</h2>
+    <a href="{%url 'accounts:edit'%}">Edit Profile</a>
+    <a href="#">{{profile.total_posts}} posts</a>
+    <a href="#">{{profile.followers}} followers</a>
+    <a href="#">{{profile.following}} following</a>
+    <h6>{{user_details.first_name}}</h6>
+    <p>{{profile.bio}}</p> 
+
+
+    <script type="text/javascript">
+        let input_onchange = function(act){
+            if (act==="remove"){
+                document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'change' %}".replace('change',act);
+                document.getElementById('pp_form').submit();
+            }else{
+                document.getElementsByName('propic')[0].addEventListener("change",()=>{
+                    document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'change' %}".replace('change',act);
+                    document.getElementById('pp_form').submit();
+                });
+            }
+
+        }
+    </script>
+    <script>
+        document.getElementById('cng').addEventListener("click",()=>{
+            document.getElementsByName('propic')[0].click();
+            input_onchange("change");
+        });
+
+    </script>
+
+    <script>
+        document.getElementById('rmv').addEventListener("click",()=>{
+            input_onchange("remove");
+        });
+    </script>
+    <script>
+        document.getElementById('p_pic').addEventListener("click",()=>{
+            document.getElementsByName('propic')[0].click();
+            input_onchange("default_change");
+        });
+    </script>
+
+{%endblock%}

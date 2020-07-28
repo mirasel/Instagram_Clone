@@ -1,0 +1,44 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login • Instagram</title>
+    <link rel="stylesheet" href="{%static 'accounts/acc_style.css'%}">
+</head>
+<body>
+    <div class="form-body">
+        <div class="f_content">
+            <div >
+                <img src="{%static 'images/instalogo.png'%}" alt="">
+            </div>
+            <form action="{%url 'accounts:login'%}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <input type="text" name="username_mail"  placeholder="Username or Email" required>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div>
+                    <button>Log In</button>
+                </div>
+                {%if error%} 
+                <div class="login_signup error">
+                        {{error}}
+                </div>
+                {%endif%}
+            </form>
+        </div>
+        <div class="f_content">
+            <div class="login_signup">
+                <p>
+                    Don't have an account? 
+                    <a href="{%url 'accounts:signup'%}" style="text-decoration: none;color: #0295f6;">Sign up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

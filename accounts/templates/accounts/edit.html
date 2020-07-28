@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block title%}Edit Profile • Instagram{%endblock%}
+{%block propic%} {{p.profile_pic.url}} {%endblock%}
+{%block body%}
+This is edit profile
+<img src="{{p.profile_pic.url}}" alt="" height="200px" width="200px">
+<h2>{{u.username}}</h2>
+<h6>{{u.first_name}}</h6>
+<p>{{p.bio}}</p>
+{%endblock%}

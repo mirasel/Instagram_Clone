@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block title%}Instagram{%endblock%}.
+{%block profilephoto%} {{profile.profile_pic.url}} {%endblock%}
+{%block body%}
+    <a href="{%url 'accounts:logout'%}">logout</a>
+{%endblock%} 

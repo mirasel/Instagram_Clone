@@ -1,0 +1,57 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up • Instagram</title>
+    <link rel="stylesheet" href="{%static 'accounts/acc_style.css'%}">
+</head>
+<body>
+    <div class="form-body">
+        <div class="f_content">
+            <div >
+                <img src="{%static 'images/instalogo.png'%}" alt="">
+            </div>
+            <form action="{%url 'accounts:signup'%}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div>
+                    <input type="text" name="fullname" placeholder="Full Name" required>
+                </div>
+                <div>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div>
+                    <button>Sign Up</button>
+                </div>
+                {%if error%} 
+                <div class="login_signup error">
+                        {{error}}
+                </div>
+                <script type="text/javascript">
+                    document.getElementsByName('email')[0].value ='{{input.email}}';
+                    document.getElementsByName('username')[0].value ='{{input.username}}';
+                    document.getElementsByName('fullname')[0].value ='{{input.fullname}}';
+                    document.getElementsByName('password')[0].value ='{{input.password}}';
+                </script>
+                {%endif%}
+            </form>
+        </div>
+
+        <div class="f_content">
+            <div class="login_signup">
+                <p>
+                    Already have an account? 
+                    <a href="{%url 'accounts:login'%}" style="text-decoration: none;color: #0295f6;">Log In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

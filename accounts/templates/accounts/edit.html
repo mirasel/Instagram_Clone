@@ -1,11 +1,101 @@
 {% extends 'base.html' %}
 {%load static%}
 {%block title%}Edit Profile • Instagram{%endblock%}
-{%block propic%} {{p.profile_pic.url}} {%endblock%}
+{%block profilephoto%} {{p.profile_pic.url}} {%endblock%}
 {%block body%}
-This is edit profile
-<img src="{{p.profile_pic.url}}" alt="" height="200px" width="200px">
-<h2>{{u.username}}</h2>
-<h6>{{u.first_name}}</h6>
-<p>{{p.bio}}</p>
+    {%if p.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
+        <img src="{{p.profile_pic.url}}" alt="" height="200px" width="200px"/>
+        <button id="cng">Change profile picture</button>
+        <button id="rmv">Remove profile picture</button>
+    {%else%}
+        <img id="p_pic"src="{{p.profile_pic.url}}" alt="" height="200px" width="200px" style="cursor: pointer;"/>
+    {%endif%}
+    <form method="POST" id="pp_form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="propic" style="display: none !important;">
+        <input type="hidden" name="url" value="{{request.get_full_path}}">
+    </form>
+    <h2>{{u.username}}</h2>
+    <h3>Edit profile:</h3>
+    <form action="{% url 'accounts:edit' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="name">Name</label>
+        <input type="text" name="name"><br>
+        <label for="username">Username</label>
+        <input type="text" name="username"><br>
+        <label for="bio">Bio</label>
+        <textarea name="bio" cols="30" rows="1"></textarea><br>
+        <label for="email">Email</label>
+        <input type="email" name="email"><br>
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+            <option value="ns">Prefer Not To Say</option>
+        </select><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {%if error%}
+        <p style="color: red;">{{error}}</p>
+    {%endif%}
+
+    <h3>Change Password:</h3>
+    <form action="{% url 'accounts:password_change' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="old_password">Old password</label>
+        <input type="password" name="old_password" id="id_old_password" required><br>
+        <label for="new_password1">New password</label>
+        <input type="password" name="new_password1" id="id_new_password1" required><br>
+        <label for="new_password2">Confirm New password</label>
+        <input type="password" name="new_password2" id="id_new_password2"><br>
+        <input type="submit" value="Change Password">
+    </form>
+
+    {% for field in form %}
+        {% for err in field.errors %}
+        <p style="color: red;">{{err}}</p>
+        {% endfor %}
+    {% endfor %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+            document.getElementsByName('name')[0].value = '{{u.first_name}}';
+            document.getElementsByName('username')[0].value = '{{u.username}}';
+            document.getElementsByName('bio')[0].innerHTML = '{{p.bio}}';
+            document.getElementsByName('email')[0].value = '{{u.email}}';
+            document.getElementsByName('oldpass')[0].value = '{{u.password}}';
+            document.querySelector('#gender [value={{p.gender}}]').selected = true;
+        });
+    </script>
+
+    <script type="text/javascript">
+        let input_onchange = function(act){
+            if (act==="remove"){
+                document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'remove' %}"
+                document.getElementById('pp_form').submit();
+            }else{
+                document.getElementsByName('propic')[0].addEventListener("change",()=>{
+                    document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'act' %}".replace('act',act);
+                    document.getElementById('pp_form').submit();
+                });
+            }
+
+        }
+    </script>
+    <script>
+        document.getElementById('cng').addEventListener("click",()=>{
+            document.getElementsByName('propic')[0].click();
+            input_onchange("change");
+        });
+        document.getElementById('rmv').addEventListener("click",()=>{
+            input_onchange("remove");
+        });
+    </script>
+    <script>
+        document.getElementById('p_pic').addEventListener("click",()=>{
+            document.getElementsByName('propic')[0].click();
+            input_onchange("default_change");
+        });
+    </script>
 {%endblock%}

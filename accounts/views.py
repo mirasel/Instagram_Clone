@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
+from django.utils.http import is_safe_url
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import auth
 from .models import profile
 
@@ -60,25 +62,75 @@ def logout(request):
         return redirect('accounts:login')
 
 def edit(request):
-    return render(request,'accounts/edit.html',{'u':request.user,'p':profile.objects.get(user=request.user)})
+    u = User.objects.get(username=request.user)
+    p = profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        name = request.POST['name']
+        bio = request.POST['bio']
+        gender = request.POST['gender']
+        u.first_name = name
+        p.bio = bio
+        p.gender = gender
+        u.save()
+        p.save()
+        if u.email != email:
+            try:
+                User.objects.get(email=email)
+                print("user - ",type(u.email),"post - ",type(email))
+                return render(request,'accounts/edit.html',{'u':u,'p':p,'error':'Another account is using '+str(email)})
+            except User.DoesNotExist:
+                u.email=email
+                if u.username != username:
+                    try:
+                        User.objects.get(username=username)
+                        u.save()
+                        return render(request,'accounts/edit.html',{'u':u,'p':p,'error':'The Username is already taken! Please try another.'})
+                    except User.DoesNotExist:
+                        u.username = username
+                        u.save()
+        else:
+            if u.username != username:
+                try:
+                    User.objects.get(username=username)
+                    return render(request,'accounts/edit.html',{'u':u,'p':p,'error':'The Username is already taken! Please try another.'})
+                except User.DoesNotExist:
+                    u.username = username
+                    u.save()
+        return redirect('accounts:edit')
+    else:
+        return render(request,'accounts/edit.html',{'u':u,'p':p})
 
 def change_pro_pic(request,action):
-    print(action)
-    if action =="default_change":
-        if request.method == 'POST':
-            u = profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        u = profile.objects.get(user=request.user)
+        redirect_url=request.POST['url']
+        if not redirect_url or not is_safe_url(redirect_url,request.get_host()):
+            redirect_url = '/'+str(request.user)
+            
+        if action =="default_change":
             u.profile_pic = request.FILES['propic']
             u.save()
-    elif action == "change":
-        if request.method == 'POST':
-            u = profile.objects.get(user=request.user)
+        elif action == "change":
             u.profile_pic.delete()
             u.profile_pic = request.FILES['propic']
             u.save()
-    else:
-        if request.method == 'POST':
-            u = profile.objects.get(user=request.user)
+        else:
             u.profile_pic.delete()
             u.profile_pic = 'defaultPic/default_profile_pic.jpg'
             u.save()
-    return redirect('instagram:profile',u_name=u.user)
+        return redirect(redirect_url)
+    else:
+        return render(request,'instagram:feed')
+
+def change_password(request):
+    u = User.objects.get(username=request.user)
+    p = profile.objects.get(user=request.user)
+    form = PasswordChangeForm(user=request.user,data=request.POST or None)
+    if form.is_valid():
+        form.save()
+        auth.update_session_auth_hash(request, form.user)
+    u = User.objects.get(username=form.user)
+    p = profile.objects.get(user=form.user)
+    return render(request, 'accounts/edit.html', {'form': form,'u':u,'p':p})

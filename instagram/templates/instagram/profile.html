@@ -13,9 +13,10 @@
     <form method="POST" id="pp_form" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="propic" style="display: none !important;">
+        <input type="hidden" name="url" value="{{request.get_full_path}}">
     </form>
     <h2>{{user_details.username}}</h2>
-    <a href="{%url 'accounts:edit'%}">Edit Profile</a>
+    <a href="{%url 'accounts:edit'%}">Edit Profile</a><br>
     <a href="#">{{profile.total_posts}} posts</a>
     <a href="#">{{profile.followers}} followers</a>
     <a href="#">{{profile.following}} following</a>
@@ -26,11 +27,11 @@
     <script type="text/javascript">
         let input_onchange = function(act){
             if (act==="remove"){
-                document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'change' %}".replace('change',act);
+                document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'remove' %}"
                 document.getElementById('pp_form').submit();
             }else{
                 document.getElementsByName('propic')[0].addEventListener("change",()=>{
-                    document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'change' %}".replace('change',act);
+                    document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'act' %}".replace('act',act);
                     document.getElementById('pp_form').submit();
                 });
             }
@@ -42,10 +43,6 @@
             document.getElementsByName('propic')[0].click();
             input_onchange("change");
         });
-
-    </script>
-
-    <script>
         document.getElementById('rmv').addEventListener("click",()=>{
             input_onchange("remove");
         });

@@ -5,5 +5,5 @@ app_name = 'instagram'
 
 urlpatterns =[
     path('',views.feed,name='feed'),
-    path('<str:u_name>/',views.get_profile,name='profile'),
+    path('<str:name>/',views.get_profile,name='profile'),
 ]

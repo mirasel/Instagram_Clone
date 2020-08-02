@@ -3,5 +3,10 @@
 {%block title%}Instagram{%endblock%}.
 {%block profilephoto%} {{profile.profile_pic.url}} {%endblock%}
 {%block body%}
-    <a href="{%url 'accounts:logout'%}">logout</a>
-{%endblock%} 
+    <a href="{%url 'accounts:logout'%}">logout</a><br>
+    {% if u%}
+        {% for profile in u %}
+            <a href="{% url 'instagram:profile' profile %}">{{profile}}</a><br>
+        {% endfor %}
+    {% endif %}
+{%endblock%}

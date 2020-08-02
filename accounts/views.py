@@ -1,7 +1,9 @@
-from django.shortcuts import render,redirect
-from django.utils.http import is_safe_url
-from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordResetView,PasswordResetCompleteView,PasswordResetConfirmView
 from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render,redirect
+from django.contrib.auth.models import User
+from django.utils.http import is_safe_url
+from django.urls import reverse_lazy
 from django.contrib import auth
 from .models import profile
 
@@ -134,3 +136,23 @@ def change_password(request):
     u = User.objects.get(username=form.user)
     p = profile.objects.get(user=form.user)
     return render(request, 'accounts/edit.html', {'form': form,'u':u,'p':p})
+
+class passwordreset(PasswordResetView):
+    template_name='accounts/passwordreset.html'
+    email_template_name='accounts/passwordresetemail.html'
+    subject_template_name='accounts/passwordresetsubject.txt'
+    success_url=reverse_lazy('accounts:password_reset_done')
+    extra_context={'done':'reset'}
+    
+class passwordresetdone(PasswordResetCompleteView):
+    template_name='accounts/passwordreset.html'
+    extra_context={'done':'email'}
+
+class passwordresetconfirm(PasswordResetConfirmView):
+    template_name='accounts/passwordreset.html'
+    success_url=reverse_lazy('accounts:password_reset_complete')
+    extra_context={'done':'resetform'}
+
+class passwordresetcomplete(PasswordResetCompleteView):
+    template_name='accounts/passwordreset.html'
+    extra_context={'done':'complete'}

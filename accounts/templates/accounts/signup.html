@@ -1,13 +1,7 @@
+{% extends 'account_base.html' %}
 {%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up • Instagram</title>
-    <link rel="stylesheet" href="{%static 'accounts/acc_style.css'%}">
-</head>
-<body>
+{% block title %}Sign up • Instagram{% endblock %}
+{% block body %}
     <div class="form-body">
         <div class="f_content">
             <div >
@@ -53,5 +47,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

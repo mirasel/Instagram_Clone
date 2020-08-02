@@ -58,13 +58,14 @@
         {% endfor %}
     {% endfor %}
 
+    <a href="{% url 'accounts:password_reset' %}" style="text-decoration: none;color: #3f4390;">Forgot password?</a>
+
     <script>
         document.addEventListener('DOMContentLoaded', function(event) {
             document.getElementsByName('name')[0].value = '{{u.first_name}}';
             document.getElementsByName('username')[0].value = '{{u.username}}';
             document.getElementsByName('bio')[0].innerHTML = '{{p.bio}}';
             document.getElementsByName('email')[0].value = '{{u.email}}';
-            document.getElementsByName('oldpass')[0].value = '{{u.password}}';
             document.querySelector('#gender [value={{p.gender}}]').selected = true;
         });
     </script>

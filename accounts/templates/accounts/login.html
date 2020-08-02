@@ -1,13 +1,7 @@
+{% extends 'account_base.html' %}
 {%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login • Instagram</title>
-    <link rel="stylesheet" href="{%static 'accounts/acc_style.css'%}">
-</head>
-<body>
+{%block title%}Login • Instagram{% endblock %}
+{% block body %}
     <div class="form-body">
         <div class="f_content">
             <div >
@@ -30,6 +24,9 @@
                 </div>
                 {%endif%}
             </form>
+            <div class="login_signup">
+                <a href="{% url 'accounts:password_reset' %}" style="text-decoration: none;color: #3f4390;">Forgot password?</a>
+            </div>
         </div>
         <div class="f_content">
             <div class="login_signup">
@@ -40,5 +37,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

@@ -32,7 +32,7 @@ class UserPost(models.Model):
     uploader        = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     title           = models.TextField(max_length=50,blank=True)
     image           = models.ImageField(upload_to=get_post_image,null=False,blank=False)
-    caption         = models.TextField(max_length=5000,blank=True)
+    caption         = models.TextField(max_length=2000,blank=True)
     date_published  = models.DateTimeField(auto_now_add=True,verbose_name='Date Published')
     slug            = models.SlugField(blank=True,unique=True)
 
@@ -56,3 +56,19 @@ def pre_save_user_post(sender,instance,**kwargs):
     instance.title = str(instance.image)
 
 pre_save.connect(pre_save_user_post,sender=UserPost)
+
+
+class PostComment(models.Model):
+    post        = models.ForeignKey(UserPost,on_delete=models.CASCADE)
+    commenter   = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    comment     = models.TextField(max_length=2000,blank=False,null=False)
+
+    def __str__(self):
+        return str(self.post)+' -> '+str(self.commenter)+' -> '+str(self.comment)[:len(self.comment)//2+1]
+
+class PostLike(models.Model):
+    post        = models.ForeignKey(UserPost,on_delete=models.CASCADE)
+    liker       = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.post)+' -> '+str(self.liker)

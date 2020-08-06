@@ -40,7 +40,7 @@ def User_profile(request,name):
     context={
         'user_details'  : u,
         'profile'       : get_profile_details(u),
-        'propic'     : get_nav_propic(request.user),
+        'propic'        : get_nav_propic(request.user),
         'posts'         : get_user_posts(name)
     }
     return render(request,'instagram/profile.html',context)

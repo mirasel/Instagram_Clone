@@ -19,7 +19,7 @@ def feed(request):
     if request.user.is_authenticated:
         user = User.objects.all().exclude(Q(username=request.user)|Q(is_superuser=1))
         context = {
-            'navpropic'   : get_nav_propic(request),
+            'navpropic'   : get_nav_propic(request.user),
             'u'         : user
         }
         return render(request,'instagram/feed.html',context)

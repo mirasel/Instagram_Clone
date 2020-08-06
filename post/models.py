@@ -16,8 +16,8 @@ def get_random_string():
     result_str = ''.join(random.choice(letters) for i in range(12))
     return result_str
 
-def update_user_total_post(process):
-    user_profile = profile.objects.get(user=self.user)
+def update_user_total_post(process,user):
+    user_profile = profile.objects.get(user=user)
     if process == 'inc':
         user_profile.total_posts += 1
     elif process == 'dec':
@@ -29,7 +29,7 @@ def update_user_total_post(process):
 
 
 class UserPost(models.Model):
-    title           = models.TextField(max_length=60)
+    title           = models.TextField(max_length=60,blank=True)
     image           = models.ImageField(upload_to=get_post_image,null=False,blank=False)
     caption         = models.TextField(max_length=5000,blank=True)
     date_published  = models.DateTimeField(auto_now_add=True,verbose_name='Date Published')
@@ -41,19 +41,19 @@ class UserPost(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        update_user_total_post('inc')
+        update_user_total_post('inc',self.user)
 
 
 
 @receiver(post_delete,sender=UserPost)
 def submission_delete(sender,instance,**kwargs):
     instance.image.delete(False)
-    update_user_total_post('dec')
+    update_user_total_post('dec',instance.user)
 
 def pre_save_user_post(sender,instance,**kwargs):
     if not instance.slug:
         slug_string = get_random_string()
-        instance.slug = slugify(instance.user.usename+slug_string)
+        instance.slug = slugify(str(instance.user.username)+slug_string)
 
     if not instance.title:
         instance.title = str(instance.image)

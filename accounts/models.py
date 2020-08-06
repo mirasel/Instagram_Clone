@@ -11,14 +11,14 @@ class profile(models.Model):
         ('f', 'Female'),
         ('ns', 'Prefer Not To Say'),
     ]
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    bio = models.TextField(max_length=150,default="")
-    gender = models.CharField(max_length=2,choices=GENDER_CHOICES,default='ns')
-    profile_pic = models.ImageField(upload_to=get_image_path,
-                    default='defaultPic/default_profile_pic.jpg')
-    followers = models.IntegerField(default=0)
-    following = models.IntegerField(default=0)
-    total_posts = models.IntegerField(default=0)
+    user           = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    bio            = models.TextField(max_length=150,default="")
+    gender         = models.CharField(max_length=2,choices=GENDER_CHOICES,default='ns')
+    profile_pic    = models.ImageField(upload_to=get_image_path,
+                                       default='defaultPic/default_profile_pic.jpg')
+    followers      = models.IntegerField(default=0)
+    following      = models.IntegerField(default=0)
+    total_posts    = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.user)

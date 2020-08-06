@@ -1,37 +1,39 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from accounts.models import profile
 from django.contrib.auth.models import User
 from django.db.models import Q
 
+#--------getting staff from database------------
 def get_profile_details(user):
-    try:
-        p = profile.objects.get(user=user)
-        return p
-    except profile.DoesNotExist:
-        p = profile(user=user)
-        p.save()
-        return p
+    p = profile.objects.get(user=user)
+    return p
 
-def get_nav_propic(request):
-    try:
-        navpropic = profile.objects.get(user=request.user)
-        return navpropic.profile_pic
-    except profile.DoesNotExist:
-        navpropic=get_profile_details(request)
-        return navpropic.profile_pic
+def get_nav_propic(user):
+    navpropic = profile.objects.get(user=user)
+    return navpropic.profile_pic
+
+#--------end of getting staff------------
+
+#------feed view------
 def feed(request):
     if request.user.is_authenticated:
-        u = User.objects.all().exclude(Q(username=request.user)|Q(is_superuser=1))
-        return render(request,'instagram/feed.html',{'profile':get_profile_details(request.user),
-                                            'u':u})
+        user = User.objects.all().exclude(Q(username=request.user)|Q(is_superuser=1))
+        context = {
+            'navpropic'   : get_nav_propic(request),
+            'u'         : user
+        }
+        return render(request,'instagram/feed.html',context)
     else:
         return redirect('accounts:login')
 
-def get_profile(request,name):
-    try:
-        u = User.objects.get(username=name)
-        return render(request,'instagram/profile.html',{'user_details':u,'profile':get_profile_details(u),'navpropic':get_nav_propic(request)})
-    except User.DoesNotExist:
-        return redirect('accounts:login')
+#Profile view----
+def User_profile(request,name):
+    u = get_object_or_404(User,username=name)
+    context={
+        'user_details'  : u,
+        'profile'       : get_profile_details(u),
+        'navpropic'     : get_nav_propic(request.user)
+    }
+    return render(request,'instagram/profile.html',context)
 
     

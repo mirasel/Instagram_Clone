@@ -8,55 +8,62 @@ from django.contrib import auth
 from .models import profile
 
 def login(request):
-    if request.method == 'POST':
-        username = request.POST['username_mail']
-        password = request.POST['password']
-        try:
-            User.objects.get(username=username)
-            user = auth.authenticate(username=username,password=password)
-            print("usersite")
-            if user is not None:
-                auth.login(request,user)
-                return redirect('instagram:feed')
-            else:
-                return render(request,'accounts/login.html',{'error':'The password was incorrect. Please double-check your password.'})
-        except User.DoesNotExist:
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            username = request.POST['username_mail']
+            password = request.POST['password']
             try:
-                User.objects.get(email=username.lower())
-                username = User.objects.get(email=username.lower()).username
+                User.objects.get(username=username)
                 user = auth.authenticate(username=username,password=password)
-                print("emailsite")
+                print("usersite")
                 if user is not None:
                     auth.login(request,user)
                     return redirect('instagram:feed')
                 else:
                     return render(request,'accounts/login.html',{'error':'The password was incorrect. Please double-check your password.'})
             except User.DoesNotExist:
-                return render(request,'accounts/login.html',{'error':"The username or email you entered doesn't belong to an account. Please check your username or email and try again."})
+                try:
+                    User.objects.get(email=username.lower())
+                    username = User.objects.get(email=username.lower()).username
+                    user = auth.authenticate(username=username,password=password)
+                    print("emailsite")
+                    if user is not None:
+                        auth.login(request,user)
+                        return redirect('instagram:feed')
+                    else:
+                        return render(request,'accounts/login.html',{'error':'The password was incorrect. Please double-check your password.'})
+                except User.DoesNotExist:
+                    return render(request,'accounts/login.html',{'error':"The username or email you entered doesn't belong to an account. Please check your username or email and try again."})
+        else:
+            return render(request,'accounts/login.html',{})
     else:
-        return render(request,'accounts/login.html',{})
+        return redirect('instagram:feed')
 
 def signup(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        email = request.POST['email']
-        first_name = request.POST['fullname']
-        password = request.POST['password']
-        try:
-            User.objects.get(username=username)
-            return render(request,'accounts/signup.html',{'error':'Username has already taken!',
-                                'input':{'username':username,'password':password,'email':email,'fullname':first_name}})
-        except User.DoesNotExist:
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            username = request.POST['username']
+            email = request.POST['email']
+            first_name = request.POST['fullname']
+            password = request.POST['password']
             try:
-                User.objects.get(email=email)
-                return render(request,'accounts/signup.html',{'error':'Email has already taken!',
+                User.objects.get(username=username)
+                return render(request,'accounts/signup.html',{'error':'Username has already taken!',
                                     'input':{'username':username,'password':password,'email':email,'fullname':first_name}})
             except User.DoesNotExist:
-                user = User.objects.create_user(username=username,email=email,first_name=first_name,password=password)
-                auth.login(request,user)
-                return redirect('instagram:feed')
+                try:
+                    User.objects.get(email=email)
+                    return render(request,'accounts/signup.html',{'error':'Email has already taken!',
+                                        'input':{'username':username,'password':password,'email':email,'fullname':first_name}})
+                except User.DoesNotExist:
+                    user = User.objects.create_user(username=username,email=email,first_name=first_name,password=password)
+                    profile.objects.create(user=user)
+                    auth.login(request,user)
+                    return redirect('instagram:feed')
+        else:
+            return render(request,'accounts/signup.html',{})
     else:
-        return render(request,'accounts/signup.html',{})
+        return redirect('instagram:feed')
 
 def logout(request):
     if request.method=='GET':
@@ -124,7 +131,7 @@ def change_pro_pic(request,action):
             u.save()
         return redirect(redirect_url)
     else:
-        return render(request,'instagram:feed')
+        return redirect('instagram:feed')
 
 def change_password(request):
     u = User.objects.get(username=request.user)

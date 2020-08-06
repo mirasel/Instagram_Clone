@@ -28,7 +28,7 @@ def feed(request):
         user = User.objects.all().exclude(Q(username=request.user)|Q(is_superuser=1))
         context = {
             'propic'   : get_nav_propic(request.user),
-            'u'           : user
+            'u'        : user
         }
         return render(request,'instagram/feed.html',context)
     else:

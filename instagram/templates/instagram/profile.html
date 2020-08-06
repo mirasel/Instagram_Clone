@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {%load static%}
 {%block title%}{{user_details.username}}{%endblock%}
-{%block profilephoto%} {{navpropic.url}} {%endblock%}
+{%block profilephoto%} {{propic.url}} {%endblock%}
 {%block body%}
     {% if user.username == user_details.username%}
         {%if profile.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
@@ -57,6 +57,14 @@
     <a href="#">{{profile.followers}} followers</a>
     <a href="#">{{profile.following}} following</a></p>
     <h6>{{user_details.first_name}}</h6>
-    <p>{{profile.bio}}</p> 
+    <p>{{profile.bio}}</p>
+
+    {% if posts %}
+        <div>
+            {% for post in posts %}
+                <a href="{% url 'post:post_details' post.slug %}"><img src="{{post.image.url}}" alt="{{post}}" height="200px" width="200px"></a>
+            {% endfor %}
+        </div>
+    {% endif %}
     
 {%endblock%}

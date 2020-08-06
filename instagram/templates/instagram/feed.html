@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {%load static%}
 {%block title%}Instagram{%endblock%}.
-{%block profilephoto%} {{navpropic.url}} {%endblock%}
+{%block profilephoto%} {{propic.url}} {%endblock%}
 {%block body%}
     <a href="{%url 'accounts:logout'%}">logout</a><br>
+    <div>
+        <a href="{% url 'post:upload_post' %}">Upload a post</a>
+    </div>
     {% if u%}
         {% for profile in u %}
             <a href="{% url 'instagram:profile' profile %}">{{profile}}</a><br>

@@ -33,8 +33,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts.apps.AccountsConfig',
-    'instagram.apps.InstagramConfig',
+    #My apps
+    'accounts',
+    'instagram',
+    'post',
+
+    #build in apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

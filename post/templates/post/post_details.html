@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} post {% endblock %}
+{% block profilephoto %} {{ propic.url }} {% endblock %}
+{% block body %}
+    <div>
+        <div>
+            <img src="{{post.image.url}}" alt="post" height="250px" width="250px">
+        </div>
+        <div>
+            <a href="{% url 'instagram:profile' post.uploader %}">
+                <img src="{{uploader.profile_pic.url}}" alt="{{uploader}}" style="border-radius: 50%;" height="24px" width="24px">
+                 {{ post.uploader }}
+            </a><br>
+            <p>{{ post.date_published.date }}</p>
+        </div>
+        <div>
+            <p>{{ post.caption }}</p>
+        </div>
+        <div>
+            <p><a href="#">{{ LIKES.total_likes }} likes this post</a>
+            <a href="#">    {{ COMMENTS.total_comments }} comments</a></p>
+        </div>
+        <div>
+            {% for commenter,comment in COMMENTS.post_comment %}
+                <div>
+                    <p>
+                        <a href="{% url 'instagram:profile' commenter %}">
+                            <img src="{{commenter.profile_pic.url}}" alt="{{commenter}}" style="border-radius: 50%;" height="24px" width="24px">
+                            {{ commenter }}
+                        </a>
+                    {{ comment }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

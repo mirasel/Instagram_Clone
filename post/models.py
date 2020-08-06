@@ -8,7 +8,7 @@ import string
 import random
 
 def get_post_image(instance, filename):
-    img_path = '{0}/posts/{1}'.format(instance.user.username,filename)
+    img_path = '{0}/posts/{1}'.format(instance.uploader,filename)
     return img_path
 
 def get_random_string():
@@ -29,33 +29,30 @@ def update_user_total_post(process,user):
 
 
 class UserPost(models.Model):
-    title           = models.TextField(max_length=60,blank=True)
+    uploader        = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    title           = models.TextField(max_length=50,blank=True)
     image           = models.ImageField(upload_to=get_post_image,null=False,blank=False)
     caption         = models.TextField(max_length=5000,blank=True)
     date_published  = models.DateTimeField(auto_now_add=True,verbose_name='Date Published')
-    user            = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     slug            = models.SlugField(blank=True,unique=True)
 
     def __str__(self):
-        return str(self.user)+'->'+str(self.title)
+        return str(self.uploader)+'->'+str(self.title)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        update_user_total_post('inc',self.user)
+        update_user_total_post('inc',self.uploader)
 
 
 
 @receiver(post_delete,sender=UserPost)
 def submission_delete(sender,instance,**kwargs):
     instance.image.delete(False)
-    update_user_total_post('dec',instance.user)
+    update_user_total_post('dec',instance.uploader)
 
 def pre_save_user_post(sender,instance,**kwargs):
-    if not instance.slug:
-        slug_string = get_random_string()
-        instance.slug = slugify(str(instance.user.username)+slug_string)
-
-    if not instance.title:
-        instance.title = str(instance.image)
+    slug_string = get_random_string()
+    instance.slug = slugify(str(instance.uploader)+slug_string)
+    instance.title = str(instance.image)
 
 pre_save.connect(pre_save_user_post,sender=UserPost)

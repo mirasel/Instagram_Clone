@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from accounts.models import profile
+from post.models import UserPost
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -12,6 +13,13 @@ def get_nav_propic(user):
     navpropic = profile.objects.get(user=user)
     return navpropic.profile_pic
 
+def get_user_posts(user):
+    try:
+        posts = UserPost.objects.filter(Q(slug__startswith=user))
+        return posts
+    except UserPost.DoesNotExist:
+        return []
+
 #--------end of getting staff------------
 
 #------feed view------
@@ -19,8 +27,8 @@ def feed(request):
     if request.user.is_authenticated:
         user = User.objects.all().exclude(Q(username=request.user)|Q(is_superuser=1))
         context = {
-            'navpropic'   : get_nav_propic(request.user),
-            'u'         : user
+            'propic'   : get_nav_propic(request.user),
+            'u'           : user
         }
         return render(request,'instagram/feed.html',context)
     else:
@@ -32,7 +40,8 @@ def User_profile(request,name):
     context={
         'user_details'  : u,
         'profile'       : get_profile_details(u),
-        'navpropic'     : get_nav_propic(request.user)
+        'propic'     : get_nav_propic(request.user),
+        'posts'         : get_user_posts(name)
     }
     return render(request,'instagram/profile.html',context)
 

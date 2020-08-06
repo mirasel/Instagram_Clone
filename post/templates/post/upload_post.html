@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Upload Post {% endblock %}
+{% block profilephoto %} {{ propic.url }} {% endblock %}
+{% block body %}
+    <div>
+        <form action="{% url 'post:upload_post' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="post_img">Upload Photo</label>
+            <input type="file" name="post_img" id="" required><br>
+            <label for="caption">Description</label>
+            <textarea name="caption" cols="30" rows="10"></textarea><br>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+{% endblock %}

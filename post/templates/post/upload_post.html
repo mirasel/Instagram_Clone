@@ -6,11 +6,21 @@
     <div>
         <form action="{% url 'post:upload_post' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <img id="Uploadimg" src="" alt="" height="200px" width="200px"><br>
             <label for="post_img">Upload Photo</label>
-            <input type="file" name="post_img" id="" required><br>
+            <input type="file" name="post_img" onchange="readimg(this) " required><br>
             <label for="caption">Description</label>
             <textarea name="caption" cols="30" rows="10"></textarea><br>
             <input type="submit" value="Upload">
         </form>
     </div>
+    <script>
+        function readimg(input){
+            let reader = new FileReader();
+            reader.onload = function (e){
+                document.getElementById('Uploadimg').setAttribute('src',e.target.result)
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
 {% endblock %}

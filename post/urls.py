@@ -6,4 +6,6 @@ app_name='post'
 urlpatterns = [
     path('upload_post/',views.upload_post,name='upload_post'),
     path('<slug:slug>/',views.post_details,name='post_details'),
+    path('add_comment/',views.add_comment,name='add_comment'),
+
 ]

@@ -17,9 +17,20 @@
         <div>
             <p>{{ post.caption }}</p>
         </div>
+        <div> 
+            <p>
+                <button id="btn-like" >Like</button>
+                <a href="#" id="t_like"></a>
+                <a href="#" id="t_comment"></a>
+            </p>
+        </div>
         <div>
-            <p><a href="#">{{ LIKES.total_likes }} likes this post</a>
-            <a href="#">    {{ COMMENTS.total_comments }} comments</a></p>
+            <form action="{% url 'post:add_comment' %}" id="comment_form" method="POST">
+                {% csrf_token %}
+                <textarea name="comment" id="comment" cols="30" rows="1" placeholder="Write a comment..."></textarea>
+                <input type="hidden" name="slug" id="slug" value="{{post.slug}}">
+                <!-- <input type="submit" style="display: none;" name="submit"> -->
+            </form>
         </div>
         <div>
             {% for commenter,comment in COMMENTS.post_comment %}
@@ -35,4 +46,31 @@
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        $(function(){
+            $("#comment").keypress(function (e) {
+                if(e.which == 13 && !e.shiftKey) {        
+                    $(this).closest("form").submit();
+                    e.preventDefault();
+                }
+            });
+            // $("#comment_form").on("submit",function(){
+            //     $.ajax({
+            //         type:   "post",
+            //         url:    "{% url 'post:add_comment' %}",
+            //         data:{
+            //             comment : $(this).val(),
+            //             csrfmiddlewaretoken : $("input[name=csrfmiddlewaretoken]").val()
+            //         },
+            //         success: function(response){
+            //             alert(response+' success bro!!');
+            //         },
+            //         error: function(e){
+            //             alert(e);
+            //         }
+            //     });
+            // })
+        });
+    </script>
 {% endblock %}

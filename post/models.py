@@ -35,9 +35,13 @@ class UserPost(models.Model):
     caption         = models.TextField(max_length=2000,blank=True)
     date_published  = models.DateTimeField(auto_now_add=True,verbose_name='Date Published')
     slug            = models.SlugField(blank=True,unique=True)
+    likes           = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="post_likes")
 
     def __str__(self):
         return str(self.uploader)+'->'+str(self.title)
+
+    def total_likes(self):
+        return self.likes.count();
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -59,16 +63,11 @@ pre_save.connect(pre_save_user_post,sender=UserPost)
 
 
 class PostComment(models.Model):
-    post        = models.ForeignKey(UserPost,on_delete=models.CASCADE)
-    commenter   = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    comment     = models.TextField(max_length=2000,blank=False,null=False)
+    post            = models.ForeignKey(UserPost,on_delete=models.CASCADE)
+    commenter       = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    comment         = models.TextField(max_length=2000,blank=False,null=False)
+    date_published  = models.DateTimeField(auto_now_add=True,verbose_name='Date Published')
 
+    
     def __str__(self):
         return str(self.post)+' -> '+str(self.commenter)+' -> '+str(self.comment)[:len(self.comment)//2+1]
-
-class PostLike(models.Model):
-    post        = models.ForeignKey(UserPost,on_delete=models.CASCADE)
-    liker       = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.post)+' -> '+str(self.liker)

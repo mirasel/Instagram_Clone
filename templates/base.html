@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     {% block headjs %}{% endblock %}
@@ -17,7 +17,7 @@
     <nav class="fix-div">
         <div class="nav-element">
             <div class="logo">
-                <a href="{%url 'instagram:feed'%}" ><img style="margin-top: 7px;"  src="{%static 'images/instalogo.png'%}" alt="" /></a>
+                <a href="{%url 'instagram:feed'%}" ><img style="margin-top: 7px;"  src="{%static 'images/favicon.ico'%}" alt="instalogo" /></a>
             </div>
             <div class="search">
                 <input class="s" type="text"  placeholder="Search" value="">

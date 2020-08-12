@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from instagram.views import get_nav_propic,get_profile_details
 from .models import UserPost,PostComment
 from django.contrib.auth.models import User
@@ -12,7 +12,7 @@ def get_post_comments(post):
     comment = []
     for c in comments:
         commenter.append(get_profile_details(c.commenter))
-        comment.append(c.comment)
+        comment.append(c)
     postcomment = zip(commenter,comment)
     return {'post_comment':postcomment,'total_comments':total_comments}
 
@@ -31,11 +31,7 @@ def upload_post(request):
         return render(request,'post/upload_post.html',context)
 
 def post_details(request,slug):
-    print("-------------------")
-    print('I am here in post details')
-    print("-------------------")
-    post = UserPost.objects.get(slug=slug)
-    print(post.likes.all())
+    post = get_object_or_404(UserPost,slug=slug)
     context = {
         'propic'    : get_nav_propic(request.user),
         'post'      : post,
@@ -46,15 +42,12 @@ def post_details(request,slug):
     return render(request,'post/post_details.html',context)
 
 def add_comment(request):
-    print("-------------------")
-    print('I am here in add comment')
-    print("-------------------")
     if request.method == 'POST':
-        post_slug = request.POST.get('slug')
-        post = UserPost.objects.get(slug=post_slug)
+        post_id = request.POST.get('post_id')
+        post = UserPost.objects.get(pk=post_id)
         user = request.user
         comment = request.POST.get('comment')
-        PostComment.objects.create(post=post,commenter=user,comment=comment)
+        post_comment=PostComment.objects.create(post=post,commenter=user,comment=comment)
         if request.is_ajax():
             name = user.username
             propic = get_nav_propic(user)
@@ -62,13 +55,21 @@ def add_comment(request):
                 'name':name,
                 'propic':propic.url,
                 'comment':comment,
+                'id':post_comment.id
             }
             return JsonResponse(data)
+
+def delete_comment(request):
+    if request.is_ajax:
+        comment_id = request.GET.get('id')
+        comment = get_object_or_404(PostComment,pk=comment_id)
+        comment.delete()
+        return JsonResponse({'id':comment_id})
         
 def edit_like(request):
     if request.is_ajax():
         post_id = request.GET.get('id')
-        post = UserPost.objects.get(pk=post_id)
+        post = get_object_or_404(UserPost,pk=post_id)
         if request.GET.get('event') == 'Like':
             post.likes.add(request.user)
             return JsonResponse({'button':'Unlike'})

@@ -19,7 +19,7 @@
                 url:    "{% url 'post:add_comment' %}",
                 data:{
                     comment : $("#comment").val(),
-                    slug : $("#slug").val(),
+                    post_id : '{{post.id}}',
                     csrfmiddlewaretoken : $("input[name=csrfmiddlewaretoken]").val()
                 },
                 success: function(response){
@@ -28,6 +28,25 @@
                     
                 },
                 error: function(e){
+                    console.log(e);
+                }
+            });
+        });
+
+        $("#comment-div").on("click","button.comment_delete",function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'get',
+                url : "{% url 'post:delete_comment' %}",
+                data: {
+                    id: $(this).data("id"),
+                },
+                success:function(data){
+                    $(`#comment-div_${data.id}`).remove();
+                    totalcomment--;
+                    $("#t_comment").text(`${totalcomment} comment${totalcomment <= 1 ? "" : "s"}`);
+                },
+                error:function(e){
                     console.log(e);
                 }
             });
@@ -61,22 +80,26 @@
         });
 
         function newcomment(data){
+            id = data.id
             name = data.name;
             propic = data.propic;
             profileurl = "{% url 'instagram:profile' 'name' %}".replace('name',name);
             comment = data.comment;
             totalcomment++;
             $("#comment-div").append(`
-                <div>
+                <div id="comment-div_${id}">
                     <p>
                         <a href="${profileurl}">
                             <img src="${propic}" alt="${name}" style="border-radius: 50%;" height="24px" width="24px">
                             ${name}
                         </a>
                         ${comment}
+                        <button class="btn btn-danger btn-sm comment_delete" data-id="${id}">Delete</button>
                     </p>
                 </div>`);
             $("#t_comment").text(`${totalcomment} comment${totalcomment <= 1 ? "" : "s"}`);
         }
+
+
     });
 </script>

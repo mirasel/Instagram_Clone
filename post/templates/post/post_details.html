@@ -3,23 +3,22 @@
 {% block title %} post {% endblock %}
 {% block profilephoto %} {{ propic.url }} {% endblock %}
 {% block body %}
-    <div>
+    <div style="padding: 10px;">
         <div>
             <img src="{{post.image.url}}" alt="post" height="250px" width="250px">
-        </div>
+        </div><br>
         <div>
             <a href="{% url 'instagram:profile' post.uploader %}">
                 <img src="{{uploader.profile_pic.url}}" alt="{{uploader}}" style="border-radius: 50%;" height="24px" width="24px">
                  {{ post.uploader }}
             </a><br>
-            <p>{{ post.date_published.date }}</p>
         </div>
         <div>
             <p>{{ post.caption }}</p>
         </div>
         <div> 
             <p>
-                <button id="btn-like" >
+                <button class="btn btn-primary btn-sm" id="btn-like" >
                     {% if user in LIKES.likers %}
                         Unlike
                     {% else %}
@@ -27,7 +26,8 @@
                     {% endif %}
                 </button>
                 <a href="#" id="t_like"></a>
-                <a href="#" id="t_comment"></a>
+                <a href="#" id="t_comment"></a><br>
+                {{ post.date_published.date }}
             </p>
         </div>
         <div>
@@ -39,13 +39,16 @@
         </div>
         <div id="comment-div">
             {% for commenter,comment in COMMENTS.post_comment %}
-                <div>
+                <div id="comment-div_{{comment.id}}">
                     <p>
                         <a href="{% url 'instagram:profile' commenter %}">
                             <img src="{{commenter.profile_pic.url}}" alt="{{commenter}}" style="border-radius: 50%;" height="24px" width="24px">
-                            {{ commenter }}
+                            {{ comment.commenter }}
                         </a>
-                    {{ comment }}
+                        {{ comment.comment }}
+                        {% if user == post.uploader or user == comment.commenter %}
+                            <button class="btn btn-danger btn-sm comment_delete" data-id="{{comment.id}}">Delete</button>
+                        {% endif %}
                     </p>
                 </div>
             {% endfor %}

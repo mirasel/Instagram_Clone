@@ -2,7 +2,7 @@
 {%load static%}
 {%block title%}Instagram{%endblock%}.
 {%block profilephoto%} {{propic.url}} {%endblock%}
-{%block body%}
+{%block content%}
     <a href="{%url 'accounts:logout'%}">logout</a><br>
     <div>
         <a href="{% url 'post:upload_post' %}">Upload a post</a>
@@ -13,3 +13,10 @@
         {% endfor %}
     {% endif %}
 {%endblock%}
+{% block js %}
+    <script>
+        $(function(){
+            $("img#home").attr("src","{% static 'images/homefill.png' %}");
+        });
+    </script>
+{% endblock %}

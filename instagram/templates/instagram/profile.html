@@ -1,70 +1,77 @@
 {% extends 'base.html' %}
-{%load static%}
-{%block title%}{{user_details.username}}{%endblock%}
-{%block profilephoto%} {{propic.url}} {%endblock%}
-{%block body%}
-    {% if user.username == user_details.username%}
-        {%if profile.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
-            <img src="{{profile.profile_pic.url}}" alt="" height="200px" width="200px"/>
-            <button id="cng">Change profile picture</button>
-            <button id="rmv">Remove profile picture</button>
-        {%else%}
-            <img id="p_pic"src="{{profile.profile_pic.url}}" alt="" height="200px" width="200px" style="cursor: pointer;"/>
-        {%endif%}
-        <form method="POST" id="pp_form" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="propic" style="display: none !important;">
-            <input type="hidden" name="url" value="{{request.get_full_path}}">
-        </form>
-        <h2>{{user_details.username}}</h2>
-        <a href="{%url 'accounts:edit'%}">Edit Profile</a><br>
+{% load static %}
 
-        <script type="text/javascript">
-            let input_onchange = function(act){
-                if (act==="remove"){
-                    document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'remove' %}"
-                    document.getElementById('pp_form').submit();
-                }else{
-                    document.getElementsByName('propic')[0].addEventListener("change",()=>{
-                        document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'act' %}".replace('act',act);
-                        document.getElementById('pp_form').submit();
-                    });
-                }
-    
-            }
-        </script>
-        <script>
-            document.getElementById('cng').addEventListener("click",()=>{
-                document.getElementsByName('propic')[0].click();
-                input_onchange("change");
-            });
-            document.getElementById('rmv').addEventListener("click",()=>{
-                input_onchange("remove");
-            });
-        </script>
-        <script>
-            document.getElementById('p_pic').addEventListener("click",()=>{
-                document.getElementsByName('propic')[0].click();
-                input_onchange("default_change");
-            });
-        </script>
 
-    {% else %}
-        <img src="{{profile.profile_pic.url}}" alt="" height="200px" width="200px"/>
-        <h2>{{user_details.username}}</h2>
-    {% endif %}
-    <p>{{profile.total_posts}} posts
-    <a href="#">{{profile.followers}} followers</a>
-    <a href="#">{{profile.following}} following</a></p>
-    <h6>{{user_details.first_name}}</h6>
-    <p>{{profile.bio}}</p>
 
-    {% if posts %}
+{% block title %}{{user_details.username}}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'instagram/css/profile.css' %}">
+{% endblock %}
+
+{% block profilephoto %} {{propic.url}} {% endblock %}
+
+{% block content %}
+    <div class="content-div">
+        <header class="profile-header">
+            <div class="propic-div">
+                {% if user.username == user_details.username%}
+                    {%if profile.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
+                        <button class="propic-button" title="change">
+                            <img class="propic" src="{{profile.profile_pic.url}}" alt="change pro pic" />
+                        </button>
+                    {%else%}
+                        <button class="propic-button" title="add">
+                            <img class="propic" src="{{profile.profile_pic.url}}" alt="add pro pic" />
+                        </button>
+                    {%endif%}
+                    <div></div>
+                {% else %}
+                    <img class="propic" src="{{profile.profile_pic.url}}" alt="{{profile}}" />
+                {% endif %}
+            </div>
+            <section class="profile-info">
+                <div class="first_info">
+                    <h2 class="u_name">{{user_details.username}}</h2>
+                    <div class="edit_profile">
+                        {% if user.username == user_details.username%}
+                            <a class="edit" href="{%url 'accounts:edit'%}">Edit Profile</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <ul class="second_info">
+                    <li class="second_info_list"><span class="list_text"><span
+                                class="list_number">{{profile.total_posts}}</span> posts</span></li>
+                    <li class="second_info_list"><a href="#" class="list_text"><span
+                                class="list_number">{{profile.followers}}</span> followers</a></li>
+                    <li class="second_info_list"><a href="#" class="list_text"><span
+                                class="list_number">{{profile.following}}</span> following</a></li>
+                </ul>
+                <div class="third_info">
+                    <h1 class="fullname">{{user_details.first_name}}</h1><br>
+                    <span class="bio">{{profile.bio}}</span>
+                </div>
+            </section>
+        </header>
+
         <div>
-            {% for post in posts %}
-                <a href="{% url 'post:post_details' post.slug %}"><img src="{{post.image.url}}" alt="{{post}}" height="200px" width="200px"></a>
-            {% endfor %}
+            <a href="#">POSTS</a>
+            {% if user.username == user_details.username%}
+            <a href="#">Upload</a>
+            {% endif %}
         </div>
-    {% endif %}
-    
-{%endblock%}
+
+        <div class="posts">
+            {% include 'instagram/snippets/posts.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        const csrf = '{% csrf_token %}';
+        const URL = "{% url 'accounts:cng_pp' %}"
+    </script>
+    <script src="{% static 'instagram/js/profile.js' %}"></script>
+{% endblock %}
+

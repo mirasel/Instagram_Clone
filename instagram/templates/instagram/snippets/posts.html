@@ -1,0 +1,9 @@
+{% if posts %}
+    {% for post in posts %}
+        <div class="post-item">
+            <a href="{% url 'post:post_details' post.slug %}">
+                <img src="{{post.image.url}}" alt="{{post}}" height="200px" width="200px">
+            </a>
+        </div>
+    {% endfor %}
+{% endif %}

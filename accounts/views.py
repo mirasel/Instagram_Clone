@@ -2,7 +2,7 @@ from django.contrib.auth.views import PasswordResetView,PasswordResetCompleteVie
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from django.utils.http import is_safe_url
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.contrib import auth
 from .models import profile
@@ -111,27 +111,25 @@ def edit(request):
     else:
         return render(request,'accounts/edit.html',{'u':u,'p':p})
 
-def change_pro_pic(request,action):
-    if request.method == 'POST':
-        u = profile.objects.get(user=request.user)
-        redirect_url=request.POST['url']
-        if not redirect_url or not is_safe_url(redirect_url,request.get_host()):
-            redirect_url = '/'+str(request.user)
-            
-        if action =="default_change":
-            u.profile_pic = request.FILES['propic']
-            u.save()
-        elif action == "change":
-            u.profile_pic.delete()
-            u.profile_pic = request.FILES['propic']
-            u.save()
+def change_pro_pic(request):
+    u = profile.objects.get(user=request.user)
+    if request.is_ajax():
+        if request.method == 'POST': 
+            action = request.POST.get('action')    
+            if action =="default_change":
+                u.profile_pic = request.FILES['imgfile']
+                u.save()
+            else:
+                u.profile_pic.delete()
+                u.profile_pic = request.FILES['imgfile']
+                u.save()
         else:
-            u.profile_pic.delete()
-            u.profile_pic = 'defaultPic/default_profile_pic.jpg'
-            u.save()
-        return redirect(redirect_url)
-    else:
-        return redirect('instagram:feed')
+            action = request.GET.get('action')
+            if action =='remove':   
+                u.profile_pic.delete()
+                u.profile_pic = 'defaultPic/default_profile_pic.jpg'
+                u.save()
+        return JsonResponse({'url':u.profile_pic.url,'action':action})
 
 def change_password(request):
     u = User.objects.get(username=request.user)

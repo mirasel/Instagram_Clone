@@ -2,7 +2,7 @@
 {%load static%}
 {%block title%}Edit Profile • Instagram{%endblock%}
 {%block profilephoto%} {{p.profile_pic.url}} {%endblock%}
-{%block body%}
+{%block content%}
     {%if p.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
         <img src="{{p.profile_pic.url}}" alt="" height="200px" width="200px"/>
         <button id="cng">Change profile picture</button>
@@ -67,36 +67,6 @@
             document.getElementsByName('bio')[0].innerHTML = '{{p.bio}}';
             document.getElementsByName('email')[0].value = '{{u.email}}';
             document.querySelector('#gender [value={{p.gender}}]').selected = true;
-        });
-    </script>
-
-    <script type="text/javascript">
-        let input_onchange = function(act){
-            if (act==="remove"){
-                document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'remove' %}"
-                document.getElementById('pp_form').submit();
-            }else{
-                document.getElementsByName('propic')[0].addEventListener("change",()=>{
-                    document.getElementById('pp_form').action = "{% url 'accounts:cng_pp' 'act' %}".replace('act',act);
-                    document.getElementById('pp_form').submit();
-                });
-            }
-
-        }
-    </script>
-    <script>
-        document.getElementById('cng').addEventListener("click",()=>{
-            document.getElementsByName('propic')[0].click();
-            input_onchange("change");
-        });
-        document.getElementById('rmv').addEventListener("click",()=>{
-            input_onchange("remove");
-        });
-    </script>
-    <script>
-        document.getElementById('p_pic').addEventListener("click",()=>{
-            document.getElementsByName('propic')[0].click();
-            input_onchange("default_change");
         });
     </script>
 {%endblock%}

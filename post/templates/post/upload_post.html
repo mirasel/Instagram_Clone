@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %} Upload Post {% endblock %}
 {% block profilephoto %} {{ propic.url }} {% endblock %}
-{% block body %}
+{% block content %}
     <div>
         <form action="{% url 'post:upload_post' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}

@@ -6,43 +6,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    {% block css %} {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     {% block headjs %}{% endblock %}
 </head>
 
 <body>
-    <nav class="fix-div">
-        <div class="nav-element">
-            <div class="logo">
-                <a href="{%url 'instagram:feed'%}" ><img style="margin-top: 7px;"  src="{%static 'images/favicon.ico'%}" alt="instalogo" /></a>
-            </div>
-            <div class="search">
-                <input class="s" type="text"  placeholder="Search" value="">
-            </div>
-            <div class="navitem"> 
-                <div class="home">
-                    <a href="{%url 'instagram:profile' user.username %}"><img class="profile" src="{%block profilephoto%}{%endblock%}" alt=""/></a>
+    <div style="height: 100%;display:flex;">
+        <section class="root-section">
+            <nav class="header">
+                <div class="nav_div">
+                    <div class="nav_content">
+                        <div class="nav_logo">
+                            <a href="{%url 'instagram:feed'%}">
+                                <div class="logo-div">
+                                    <img class="logo" src="{%static 'images/favicon.ico'%}" alt="instalogo" />
+                                </div>
+                            </a>
+                        </div>
+                        <div class="nav_search">
+                            <input class="search" type="text" placeholder="Search" value="">
+                        </div>
+                        <div class="nav_menu">
+                            <div class="menu">
+                                <div class="menu-item">
+                                    <a href="{%url 'instagram:feed'%}"><img id="home" src="{%static 'images/home.png'%}" alt="home" /></a>
+                                </div>
+                                <div class="menu-item">
+                                    <a href="#"><img id="send" src="{%static 'images/send.png'%}" alt="send" /></a>
+                                </div>
+                                <div class="menu-item">
+                                    <a href="#"><img id="compass" src="{%static 'images/compass.png'%}" alt="compass" /></a>
+                                </div>
+                                <div class="menu-item">
+                                    <a href="#"><img id="heart" src="{%static 'images/heart.png'%}" alt="heart" /> </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a href="{%url 'instagram:profile' user.username %}">
+                                        <img class="profile" src="{%block profilephoto%}{%endblock%}" alt="{{user}}" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="home">
-                    <a href="#"><img src="{%static 'images/heart.png'%}" alt=""/> </a>
+            </nav>
+            <main class="main-content">
+                {%block content%}
+                {%endblock%}
+            </main>
+            <footer>
+                <div>
                 </div>
-                <div class="home">
-                    <a href="#"><img src="{%static 'images/compass.png'%}" alt=""/></a>
-                </div>
-                <div class="home">
-                    <a href="#"><img src="{%static 'images/send.png'%}" alt=""/></a>
-                </div>
-                <div class="home">
-                    <a href="{%url 'instagram:feed'%}"><img src="{%static 'images/homefill.png'%}" alt=""/></a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    {%block body%}
-    {%endblock%}
-    {% block js %}{% endblock %}
+            </footer>
+        </section>
+    </div>
+    {% block js %}
+    {% endblock %}
+    <script>
+        $(function(){
+            const navitems = ['home','send','compass','heart'];
+            $('div.menu-item a').on("click","img",function(){
+                const navitem = $(this).attr("id");
+                navitems.forEach(function(i){
+                    if (i===navitem){
+                        const imgsrc = "{%static 'images/imgsrc.png'%}".replace('imgsrc',`${i}fill`);
+                        $(`img#${i}`).attr("src",imgsrc);
+                    }else{
+                        const imgsrc = "{%static 'images/imgsrc.png'%}".replace('imgsrc',`${i}`);
+                        $(`img#${i}`).attr("src",imgsrc);
+                    }
+                });
+            })
+
+        });
+
+    </script>
+    {% block overlay %}
+    {% endblock %}
 </body>
+
 </html>

@@ -1,22 +1,53 @@
 {% extends 'base.html' %}
+{% load mathfilters %}
 {%load static%}
-{%block title%}Instagram{%endblock%}.
+{%block title%}Instagram{%endblock%}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'instagram/css/feed.css' %}">
+{% endblock %}
 {%block profilephoto%} {{propic.url}} {%endblock%}
 {%block content%}
-    <a href="{%url 'accounts:logout'%}">logout</a><br>
-    <div>
-        <a href="{% url 'post:upload_post' %}">Upload a post</a>
-    </div>
-    {% if u%}
-        {% for profile in u %}
-            <a href="{% url 'instagram:profile' profile %}">{{profile}}</a><br>
-        {% endfor %}
-    {% endif %}
+    <section class="main_feed">
+        <div class="post_list">
+            <div>
+                <div style="flex-direction: column; padding-top: 0px;">
+                    {% for posts in userpost_list %}
+                        <article class="post_article">
+                            <header class="post_head">
+                                
+                            </header>
+                            <div><img src="{{posts.image.url}}" alt="" height="400px" width="400px"></div>
+                            <div>{{ posts.date_published.date }}
+                                {% if posts.total_likes %}
+                                    <div>  
+                                        <p>
+                                            <strong>
+                                                {{ posts.likes.first }}
+                                            </strong> 
+                                            {% if posts.total_likes|sub:1 %}and {{ posts.total_likes|sub:1 }} others{% endif %} likes it
+                                        </p>
+                                        
+                                    </div>
+                                {% endif %}
+                                <p><strong>{{ posts.uploader }}</strong> {{ posts.caption }}</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="user_list">
+            hello bro
+        </div>
+    </section>
+
 {%endblock%}
 {% block js %}
     <script>
         $(function(){
-            $("img#home").attr("src","{% static 'images/homefill.png' %}");
+            pageactive('home');
+            dropmenu('home');
+            dropmenuhide('home');
         });
     </script>
 {% endblock %}

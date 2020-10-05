@@ -4,6 +4,6 @@ from . import views
 app_name = 'instagram'
 
 urlpatterns =[
-    path('',views.feed,name='feed'),
-    path('<name>/',views.User_profile,name='profile'),
+    path('',views.Feed.as_view(),name='feed'),
+    path('<name>/',views.ProfileDetailView.as_view(),name='profile'),
 ]

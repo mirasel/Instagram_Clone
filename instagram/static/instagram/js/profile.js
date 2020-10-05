@@ -25,7 +25,36 @@ function change_pic_form(action){
     }
 }
 
+function readimg(input){
+    let reader = new FileReader();
+    reader.onload = function (e){
+        $('img#Uploadimg').removeClass('none').attr('src',e.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
 $(function () {
+    $('img#propic').prev().addClass('propicactive')
+    dropmenu('propic');
+    dropmenuhide('propic')
+
+    $('div.post_and_upload div').on("click",function(){
+        const pu = ['POSTS','UPLOAD'];
+        const atext = $(this).text();
+        pu.forEach(function(i){
+            if (i===atext){
+                $(`div.post_upload_links:contains(${i})`).addClass('post_upload_active')
+                $(`div.${i.toLowerCase()}`).removeClass('none')
+                if (i ==='POSTS'){
+                    $('div.upload form').trigger('reset').find('img#Uploadimg').addClass('none');
+                }
+            }else{
+                $(`div.post_upload_links:contains(${i})`).removeClass('post_upload_active')
+                $(`div.${i.toLowerCase()}`).addClass('none')
+            }
+        });
+    })
+    $('div.post_upload_links:contains(POSTS)').click()
 
     change_pic_form('add');
 

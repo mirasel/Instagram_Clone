@@ -1,0 +1,3075 @@
+Help on package django.views.generic in django.views:
+
+NAME
+    django.views.generic
+
+PACKAGE CONTENTS
+    base
+    dates
+    detail
+    edit
+    list
+
+CLASSES
+    builtins.Exception(builtins.BaseException)
+        GenericViewError
+    builtins.object
+        django.views.generic.base.View
+            django.views.generic.base.RedirectView
+            django.views.generic.base.TemplateView(django.views.generic.base.TemplateResponseMixin, django.views.generic.base.ContextMixin, django.views.generic.base.View)
+    django.views.generic.base.ContextMixin(builtins.object)
+        django.views.generic.base.TemplateView(django.views.generic.base.TemplateResponseMixin, django.views.generic.base.ContextMixin, django.views.generic.base.View)
+    django.views.generic.base.TemplateResponseMixin(builtins.object)
+        django.views.generic.base.TemplateView(django.views.generic.base.TemplateResponseMixin, django.views.generic.base.ContextMixin, django.views.generic.base.View)
+        django.views.generic.edit.FormView(django.views.generic.base.TemplateResponseMixin, django.views.generic.edit.BaseFormView)
+    django.views.generic.dates.BaseArchiveIndexView(django.views.generic.dates.BaseDateListView)
+        django.views.generic.dates.ArchiveIndexView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseArchiveIndexView)
+    django.views.generic.dates.BaseDateDetailView(django.views.generic.dates.YearMixin, django.views.generic.dates.MonthMixin, django.views.generic.dates.DayMixin, django.views.generic.dates.DateMixin, django.views.generic.detail.BaseDetailView)
+        django.views.generic.dates.DateDetailView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.dates.BaseDateDetailView)
+    django.views.generic.dates.BaseDayArchiveView(django.views.generic.dates.YearMixin, django.views.generic.dates.MonthMixin, django.views.generic.dates.DayMixin, django.views.generic.dates.BaseDateListView)
+        django.views.generic.dates.DayArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseDayArchiveView)
+    django.views.generic.dates.BaseMonthArchiveView(django.views.generic.dates.YearMixin, django.views.generic.dates.MonthMixin, django.views.generic.dates.BaseDateListView)
+        django.views.generic.dates.MonthArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseMonthArchiveView)
+    django.views.generic.dates.BaseTodayArchiveView(django.views.generic.dates.BaseDayArchiveView)
+        django.views.generic.dates.TodayArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseTodayArchiveView)
+    django.views.generic.dates.BaseWeekArchiveView(django.views.generic.dates.YearMixin, django.views.generic.dates.WeekMixin, django.views.generic.dates.BaseDateListView)
+        django.views.generic.dates.WeekArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseWeekArchiveView)
+    django.views.generic.dates.BaseYearArchiveView(django.views.generic.dates.YearMixin, django.views.generic.dates.BaseDateListView)
+        django.views.generic.dates.YearArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseYearArchiveView)
+    django.views.generic.detail.BaseDetailView(django.views.generic.detail.SingleObjectMixin, django.views.generic.base.View)
+        django.views.generic.detail.DetailView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.detail.BaseDetailView)
+    django.views.generic.detail.SingleObjectTemplateResponseMixin(django.views.generic.base.TemplateResponseMixin)
+        django.views.generic.dates.DateDetailView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.dates.BaseDateDetailView)
+        django.views.generic.detail.DetailView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.detail.BaseDetailView)
+        django.views.generic.edit.CreateView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.edit.BaseCreateView)
+        django.views.generic.edit.DeleteView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.edit.BaseDeleteView)
+        django.views.generic.edit.UpdateView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.edit.BaseUpdateView)
+    django.views.generic.edit.BaseCreateView(django.views.generic.edit.ModelFormMixin, django.views.generic.edit.ProcessFormView)
+        django.views.generic.edit.CreateView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.edit.BaseCreateView)
+    django.views.generic.edit.BaseDeleteView(django.views.generic.edit.DeletionMixin, django.views.generic.detail.BaseDetailView)
+        django.views.generic.edit.DeleteView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.edit.BaseDeleteView)
+    django.views.generic.edit.BaseFormView(django.views.generic.edit.FormMixin, django.views.generic.edit.ProcessFormView)
+        django.views.generic.edit.FormView(django.views.generic.base.TemplateResponseMixin, django.views.generic.edit.BaseFormView)
+    django.views.generic.edit.BaseUpdateView(django.views.generic.edit.ModelFormMixin, django.views.generic.edit.ProcessFormView)
+        django.views.generic.edit.UpdateView(django.views.generic.detail.SingleObjectTemplateResponseMixin, django.views.generic.edit.BaseUpdateView)
+    django.views.generic.list.BaseListView(django.views.generic.list.MultipleObjectMixin, django.views.generic.base.View)
+        django.views.generic.list.ListView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.list.BaseListView)
+    django.views.generic.list.MultipleObjectTemplateResponseMixin(django.views.generic.base.TemplateResponseMixin)
+        django.views.generic.dates.ArchiveIndexView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseArchiveIndexView)
+        django.views.generic.dates.DayArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseDayArchiveView)
+        django.views.generic.dates.MonthArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseMonthArchiveView)
+        django.views.generic.dates.TodayArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseTodayArchiveView)
+        django.views.generic.dates.WeekArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseWeekArchiveView)
+        django.views.generic.dates.YearArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.dates.BaseYearArchiveView)
+        django.views.generic.list.ListView(django.views.generic.list.MultipleObjectTemplateResponseMixin, django.views.generic.list.BaseListView)
+    
+    class ArchiveIndexView(django.views.generic.list.MultipleObjectTemplateResponseMixin, BaseArchiveIndexView)
+     |  ArchiveIndexView(**kwargs)
+     |  
+     |  Top-level archive of date-based items.
+     |  
+     |  Method resolution order:
+     |      ArchiveIndexView
+     |      django.views.generic.list.MultipleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseArchiveIndexView
+     |      BaseDateListView
+     |      django.views.generic.list.MultipleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      DateMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_archive'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response is overridden.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseArchiveIndexView:
+     |  
+     |  get_dated_items(self)
+     |      Return (date_list, items, extra_context) for this request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseArchiveIndexView:
+     |  
+     |  context_object_name = 'latest'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDateListView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  get_date_list(self, queryset, date_type=None, ordering='ASC')
+     |      Get a date list by calling `queryset.dates/datetimes()`, checking
+     |      along the way for empty lists that aren't allowed.
+     |  
+     |  get_date_list_period(self)
+     |      Get the aggregation period for the list of dates: 'year', 'month', or
+     |      'day'.
+     |  
+     |  get_dated_queryset(self, **lookup)
+     |      Get a queryset properly filtered according to `allow_future` and any
+     |      extra lookup kwargs.
+     |  
+     |  get_ordering(self)
+     |      Return the field or fields to use for ordering the queryset; use the
+     |      date field by default.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseDateListView:
+     |  
+     |  allow_empty = False
+     |  
+     |  date_list_period = 'year'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  get_allow_empty(self)
+     |      Return ``True`` if the view should display empty lists and ``False``
+     |      if a 404 should be raised instead.
+     |  
+     |  get_context_data(self, *, object_list=None, **kwargs)
+     |      Get the context for this view.
+     |  
+     |  get_context_object_name(self, object_list)
+     |      Get the name of the item to be used in the context.
+     |  
+     |  get_paginate_by(self, queryset)
+     |      Get the number of items to paginate by, or ``None`` for no pagination.
+     |  
+     |  get_paginate_orphans(self)
+     |      Return the maximum number of orphans extend the last page by when
+     |      paginating.
+     |  
+     |  get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, **kwargs)
+     |      Return an instance of the paginator for this view.
+     |  
+     |  get_queryset(self)
+     |      Return the list of items for this view.
+     |      
+     |      The return value must be an iterable and may be an instance of
+     |      `QuerySet` in which case `QuerySet` specific behavior will be enabled.
+     |  
+     |  paginate_queryset(self, queryset, page_size)
+     |      Paginate the queryset, if needed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  model = None
+     |  
+     |  ordering = None
+     |  
+     |  page_kwarg = 'page'
+     |  
+     |  paginate_by = None
+     |  
+     |  paginate_orphans = 0
+     |  
+     |  paginator_class = <class 'django.core.paginator.Paginator'>
+     |  
+     |  
+     |  queryset = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DateMixin:
+     |  
+     |  get_allow_future(self)
+     |      Return `True` if the view should be allowed to display objects from
+     |      the future.
+     |  
+     |  get_date_field(self)
+     |      Get the name of the date field to be used to filter by.
+     |  
+     |  uses_datetime_field = <django.utils.functional.cached_property object>
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DateMixin:
+     |  
+     |  allow_future = False
+     |  
+     |  date_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class CreateView(django.views.generic.detail.SingleObjectTemplateResponseMixin, BaseCreateView)
+     |  CreateView(**kwargs)
+     |  
+     |  View for creating a new object, with a response rendered by a template.
+     |  
+     |  Method resolution order:
+     |      CreateView
+     |      django.views.generic.detail.SingleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseCreateView
+     |      ModelFormMixin
+     |      FormMixin
+     |      django.views.generic.detail.SingleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      ProcessFormView
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_form'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. May not be
+     |      called if render_to_response() is overridden. Return the following list:
+     |      
+     |      * the value of ``template_name`` on the view (if provided)
+     |      * the contents of the ``template_name_field`` field on the
+     |        object instance that the view is operating upon (if available)
+     |      * ``<app_label>/<model_name><template_name_suffix>.html``
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  template_name_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseCreateView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |      Handle GET requests: instantiate a blank version of the form.
+     |  
+     |  post(self, request, *args, **kwargs)
+     |      Handle POST requests: instantiate a form instance with the passed
+     |      POST variables and then check if it's valid.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from ModelFormMixin:
+     |  
+     |  form_valid(self, form)
+     |      If the form is valid, save the associated model.
+     |  
+     |  get_form_class(self)
+     |      Return the form class to use in this view.
+     |  
+     |  get_form_kwargs(self)
+     |      Return the keyword arguments for instantiating the form.
+     |  
+     |  get_success_url(self)
+     |      Return the URL to redirect to after processing a valid form.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from ModelFormMixin:
+     |  
+     |  fields = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from FormMixin:
+     |  
+     |  form_invalid(self, form)
+     |      If the form is invalid, render the invalid form.
+     |  
+     |  get_context_data(self, **kwargs)
+     |      Insert the form into the context dict.
+     |  
+     |  get_form(self, form_class=None)
+     |      Return an instance of the form to be used in this view.
+     |  
+     |  get_initial(self)
+     |      Return the initial data to use for forms on this view.
+     |  
+     |  get_prefix(self)
+     |      Return the prefix to use for forms.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from FormMixin:
+     |  
+     |  form_class = None
+     |  
+     |  initial = {}
+     |  
+     |  prefix = None
+     |  
+     |  success_url = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  get_context_object_name(self, obj)
+     |      Get the name to use for the object.
+     |  
+     |  get_object(self, queryset=None)
+     |      Return the object the view is displaying.
+     |      
+     |      Require `self.queryset` and a `pk` or `slug` argument in the URLconf.
+     |      Subclasses can override this to return any object.
+     |  
+     |  get_queryset(self)
+     |      Return the `QuerySet` that will be used to look up the object.
+     |      
+     |      This method is called by the default implementation of get_object() and
+     |      may not be called if get_object() is overridden.
+     |  
+     |  get_slug_field(self)
+     |      Get the name of a slug field to be used to look up by slug.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  pk_url_kwarg = 'pk'
+     |  
+     |  query_pk_and_slug = False
+     |  
+     |  queryset = None
+     |  
+     |  slug_field = 'slug'
+     |  
+     |  slug_url_kwarg = 'slug'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from ProcessFormView:
+     |  
+     |  put(self, *args, **kwargs)
+     |      # PUT is a valid HTTP verb for creating (with a known URL) or editing an
+     |      # object, note that browsers only support POST for now.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class DateDetailView(django.views.generic.detail.SingleObjectTemplateResponseMixin, BaseDateDetailView)
+     |  DateDetailView(**kwargs)
+     |  
+     |  Detail view of a single object on a single date; this differs from the
+     |  standard DetailView by accepting a year/month/day in the URL.
+     |  
+     |  Method resolution order:
+     |      DateDetailView
+     |      django.views.generic.detail.SingleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseDateDetailView
+     |      YearMixin
+     |      MonthMixin
+     |      DayMixin
+     |      DateMixin
+     |      django.views.generic.detail.BaseDetailView
+     |      django.views.generic.detail.SingleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_detail'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. May not be
+     |      called if render_to_response() is overridden. Return the following list:
+     |      
+     |      * the value of ``template_name`` on the view (if provided)
+     |      * the contents of the ``template_name_field`` field on the
+     |        object instance that the view is operating upon (if available)
+     |      * ``<app_label>/<model_name><template_name_suffix>.html``
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  template_name_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDateDetailView:
+     |  
+     |  get_object(self, queryset=None)
+     |      Get the object this request displays.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from YearMixin:
+     |  
+     |  get_next_year(self, date)
+     |      Get the next valid year.
+     |  
+     |  get_previous_year(self, date)
+     |      Get the previous valid year.
+     |  
+     |  get_year(self)
+     |      Return the year for which this view should display data.
+     |  
+     |  get_year_format(self)
+     |      Get a year format string in strptime syntax to be used to parse the
+     |      year from url variables.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from YearMixin:
+     |  
+     |  year = None
+     |  
+     |  year_format = '%Y'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from MonthMixin:
+     |  
+     |  get_month(self)
+     |      Return the month for which this view should display data.
+     |  
+     |  get_month_format(self)
+     |      Get a month format string in strptime syntax to be used to parse the
+     |      month from url variables.
+     |  
+     |  get_next_month(self, date)
+     |      Get the next valid month.
+     |  
+     |  get_previous_month(self, date)
+     |      Get the previous valid month.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from MonthMixin:
+     |  
+     |  month = None
+     |  
+     |  month_format = '%b'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DayMixin:
+     |  
+     |  get_day(self)
+     |      Return the day for which this view should display data.
+     |  
+     |  get_day_format(self)
+     |      Get a day format string in strptime syntax to be used to parse the day
+     |      from url variables.
+     |  
+     |  get_next_day(self, date)
+     |      Get the next valid day.
+     |  
+     |  get_previous_day(self, date)
+     |      Get the previous valid day.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DayMixin:
+     |  
+     |  day = None
+     |  
+     |  day_format = '%d'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DateMixin:
+     |  
+     |  get_allow_future(self)
+     |      Return `True` if the view should be allowed to display objects from
+     |      the future.
+     |  
+     |  get_date_field(self)
+     |      Get the name of the date field to be used to filter by.
+     |  
+     |  uses_datetime_field = <django.utils.functional.cached_property object>
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DateMixin:
+     |  
+     |  allow_future = False
+     |  
+     |  date_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.BaseDetailView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  get_context_data(self, **kwargs)
+     |      Insert the single object into the context dict.
+     |  
+     |  get_context_object_name(self, obj)
+     |      Get the name to use for the object.
+     |  
+     |  get_queryset(self)
+     |      Return the `QuerySet` that will be used to look up the object.
+     |      
+     |      This method is called by the default implementation of get_object() and
+     |      may not be called if get_object() is overridden.
+     |  
+     |  get_slug_field(self)
+     |      Get the name of a slug field to be used to look up by slug.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  pk_url_kwarg = 'pk'
+     |  
+     |  query_pk_and_slug = False
+     |  
+     |  queryset = None
+     |  
+     |  slug_field = 'slug'
+     |  
+     |  slug_url_kwarg = 'slug'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class DayArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, BaseDayArchiveView)
+     |  DayArchiveView(**kwargs)
+     |  
+     |  List of objects published on a given day.
+     |  
+     |  Method resolution order:
+     |      DayArchiveView
+     |      django.views.generic.list.MultipleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseDayArchiveView
+     |      YearMixin
+     |      MonthMixin
+     |      DayMixin
+     |      BaseDateListView
+     |      django.views.generic.list.MultipleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      DateMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_archive_day'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response is overridden.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDayArchiveView:
+     |  
+     |  get_dated_items(self)
+     |      Return (date_list, items, extra_context) for this request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from YearMixin:
+     |  
+     |  get_next_year(self, date)
+     |      Get the next valid year.
+     |  
+     |  get_previous_year(self, date)
+     |      Get the previous valid year.
+     |  
+     |  get_year(self)
+     |      Return the year for which this view should display data.
+     |  
+     |  get_year_format(self)
+     |      Get a year format string in strptime syntax to be used to parse the
+     |      year from url variables.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from YearMixin:
+     |  
+     |  year = None
+     |  
+     |  year_format = '%Y'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from MonthMixin:
+     |  
+     |  get_month(self)
+     |      Return the month for which this view should display data.
+     |  
+     |  get_month_format(self)
+     |      Get a month format string in strptime syntax to be used to parse the
+     |      month from url variables.
+     |  
+     |  get_next_month(self, date)
+     |      Get the next valid month.
+     |  
+     |  get_previous_month(self, date)
+     |      Get the previous valid month.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from MonthMixin:
+     |  
+     |  month = None
+     |  
+     |  month_format = '%b'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DayMixin:
+     |  
+     |  get_day(self)
+     |      Return the day for which this view should display data.
+     |  
+     |  get_day_format(self)
+     |      Get a day format string in strptime syntax to be used to parse the day
+     |      from url variables.
+     |  
+     |  get_next_day(self, date)
+     |      Get the next valid day.
+     |  
+     |  get_previous_day(self, date)
+     |      Get the previous valid day.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DayMixin:
+     |  
+     |  day = None
+     |  
+     |  day_format = '%d'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDateListView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  get_date_list(self, queryset, date_type=None, ordering='ASC')
+     |      Get a date list by calling `queryset.dates/datetimes()`, checking
+     |      along the way for empty lists that aren't allowed.
+     |  
+     |  get_date_list_period(self)
+     |      Get the aggregation period for the list of dates: 'year', 'month', or
+     |      'day'.
+     |  
+     |  get_dated_queryset(self, **lookup)
+     |      Get a queryset properly filtered according to `allow_future` and any
+     |      extra lookup kwargs.
+     |  
+     |  get_ordering(self)
+     |      Return the field or fields to use for ordering the queryset; use the
+     |      date field by default.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseDateListView:
+     |  
+     |  allow_empty = False
+     |  
+     |  date_list_period = 'year'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  get_allow_empty(self)
+     |      Return ``True`` if the view should display empty lists and ``False``
+     |      if a 404 should be raised instead.
+     |  
+     |  get_context_data(self, *, object_list=None, **kwargs)
+     |      Get the context for this view.
+     |  
+     |  get_context_object_name(self, object_list)
+     |      Get the name of the item to be used in the context.
+     |  
+     |  get_paginate_by(self, queryset)
+     |      Get the number of items to paginate by, or ``None`` for no pagination.
+     |  
+     |  get_paginate_orphans(self)
+     |      Return the maximum number of orphans extend the last page by when
+     |      paginating.
+     |  
+     |  get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, **kwargs)
+     |      Return an instance of the paginator for this view.
+     |  
+     |  get_queryset(self)
+     |      Return the list of items for this view.
+     |      
+     |      The return value must be an iterable and may be an instance of
+     |      `QuerySet` in which case `QuerySet` specific behavior will be enabled.
+     |  
+     |  paginate_queryset(self, queryset, page_size)
+     |      Paginate the queryset, if needed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  ordering = None
+     |  
+     |  page_kwarg = 'page'
+     |  
+     |  paginate_by = None
+     |  
+     |  paginate_orphans = 0
+     |  
+     |  paginator_class = <class 'django.core.paginator.Paginator'>
+     |  
+     |  
+     |  queryset = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DateMixin:
+     |  
+     |  get_allow_future(self)
+     |      Return `True` if the view should be allowed to display objects from
+     |      the future.
+     |  
+     |  get_date_field(self)
+     |      Get the name of the date field to be used to filter by.
+     |  
+     |  uses_datetime_field = <django.utils.functional.cached_property object>
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DateMixin:
+     |  
+     |  allow_future = False
+     |  
+     |  date_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class DeleteView(django.views.generic.detail.SingleObjectTemplateResponseMixin, BaseDeleteView)
+     |  DeleteView(**kwargs)
+     |  
+     |  View for deleting an object retrieved with self.get_object(), with a
+     |  response rendered by a template.
+     |  
+     |  Method resolution order:
+     |      DeleteView
+     |      django.views.generic.detail.SingleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseDeleteView
+     |      DeletionMixin
+     |      django.views.generic.detail.BaseDetailView
+     |      django.views.generic.detail.SingleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_confirm_delete'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. May not be
+     |      called if render_to_response() is overridden. Return the following list:
+     |      
+     |      * the value of ``template_name`` on the view (if provided)
+     |      * the contents of the ``template_name_field`` field on the
+     |        object instance that the view is operating upon (if available)
+     |      * ``<app_label>/<model_name><template_name_suffix>.html``
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  template_name_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DeletionMixin:
+     |  
+     |  delete(self, request, *args, **kwargs)
+     |      Call the delete() method on the fetched object and then redirect to the
+     |      success URL.
+     |  
+     |  get_success_url(self)
+     |  
+     |  post(self, request, *args, **kwargs)
+     |      # Add support for browsers which only accept GET and POST for now.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DeletionMixin:
+     |  
+     |  success_url = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.BaseDetailView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  get_context_data(self, **kwargs)
+     |      Insert the single object into the context dict.
+     |  
+     |  get_context_object_name(self, obj)
+     |      Get the name to use for the object.
+     |  
+     |  get_object(self, queryset=None)
+     |      Return the object the view is displaying.
+     |      
+     |      Require `self.queryset` and a `pk` or `slug` argument in the URLconf.
+     |      Subclasses can override this to return any object.
+     |  
+     |  get_queryset(self)
+     |      Return the `QuerySet` that will be used to look up the object.
+     |      
+     |      This method is called by the default implementation of get_object() and
+     |      may not be called if get_object() is overridden.
+     |  
+     |  get_slug_field(self)
+     |      Get the name of a slug field to be used to look up by slug.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  pk_url_kwarg = 'pk'
+     |  
+     |  query_pk_and_slug = False
+     |  
+     |  queryset = None
+     |  
+     |  slug_field = 'slug'
+     |  
+     |  slug_url_kwarg = 'slug'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class DetailView(SingleObjectTemplateResponseMixin, BaseDetailView)
+     |  DetailView(**kwargs)
+     |  
+     |  Render a "detail" view of an object.
+     |  
+     |  By default this is a model instance looked up from `self.queryset`, but the
+     |  view will support display of *any* object by overriding `self.get_object()`.
+     |  
+     |  Method resolution order:
+     |      DetailView
+     |      SingleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseDetailView
+     |      SingleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Methods inherited from SingleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. May not be
+     |      called if render_to_response() is overridden. Return the following list:
+     |      
+     |      * the value of ``template_name`` on the view (if provided)
+     |      * the contents of the ``template_name_field`` field on the
+     |        object instance that the view is operating upon (if available)
+     |      * ``<app_label>/<model_name><template_name_suffix>.html``
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from SingleObjectTemplateResponseMixin:
+     |  
+     |  template_name_field = None
+     |  
+     |  template_name_suffix = '_detail'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDetailView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from SingleObjectMixin:
+     |  
+     |  get_context_data(self, **kwargs)
+     |      Insert the single object into the context dict.
+     |  
+     |  get_context_object_name(self, obj)
+     |      Get the name to use for the object.
+     |  
+     |  get_object(self, queryset=None)
+     |      Return the object the view is displaying.
+     |      
+     |      Require `self.queryset` and a `pk` or `slug` argument in the URLconf.
+     |      Subclasses can override this to return any object.
+     |  
+     |  get_queryset(self)
+     |      Return the `QuerySet` that will be used to look up the object.
+     |      
+     |      This method is called by the default implementation of get_object() and
+     |      may not be called if get_object() is overridden.
+     |  
+     |  get_slug_field(self)
+     |      Get the name of a slug field to be used to look up by slug.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from SingleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  pk_url_kwarg = 'pk'
+     |  
+     |  query_pk_and_slug = False
+     |  
+     |  queryset = None
+     |  
+     |  slug_field = 'slug'
+     |  
+     |  slug_url_kwarg = 'slug'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class FormView(django.views.generic.base.TemplateResponseMixin, BaseFormView)
+     |  FormView(**kwargs)
+     |  
+     |  A view for displaying a form and rendering a template response.
+     |  
+     |  Method resolution order:
+     |      FormView
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseFormView
+     |      FormMixin
+     |      django.views.generic.base.ContextMixin
+     |      ProcessFormView
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response() is overridden.
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from FormMixin:
+     |  
+     |  form_invalid(self, form)
+     |      If the form is invalid, render the invalid form.
+     |  
+     |  form_valid(self, form)
+     |      If the form is valid, redirect to the supplied URL.
+     |  
+     |  get_context_data(self, **kwargs)
+     |      Insert the form into the context dict.
+     |  
+     |  get_form(self, form_class=None)
+     |      Return an instance of the form to be used in this view.
+     |  
+     |  get_form_class(self)
+     |      Return the form class to use.
+     |  
+     |  get_form_kwargs(self)
+     |      Return the keyword arguments for instantiating the form.
+     |  
+     |  get_initial(self)
+     |      Return the initial data to use for forms on this view.
+     |  
+     |  get_prefix(self)
+     |      Return the prefix to use for forms.
+     |  
+     |  get_success_url(self)
+     |      Return the URL to redirect to after processing a valid form.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from FormMixin:
+     |  
+     |  form_class = None
+     |  
+     |  initial = {}
+     |  
+     |  prefix = None
+     |  
+     |  success_url = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from ProcessFormView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |      Handle GET requests: instantiate a blank version of the form.
+     |  
+     |  post(self, request, *args, **kwargs)
+     |      Handle POST requests: instantiate a form instance with the passed
+     |      POST variables and then check if it's valid.
+     |  
+     |  put(self, *args, **kwargs)
+     |      # PUT is a valid HTTP verb for creating (with a known URL) or editing an
+     |      # object, note that browsers only support POST for now.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class GenericViewError(builtins.Exception)
+     |  A problem in a generic view.
+     |  
+     |  Method resolution order:
+     |      GenericViewError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __init__(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      Helper for pickle.
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class ListView(MultipleObjectTemplateResponseMixin, BaseListView)
+     |  ListView(**kwargs)
+     |  
+     |  Render some list of objects, set by `self.model` or `self.queryset`.
+     |  `self.queryset` can actually be any iterable of items, not just a queryset.
+     |  
+     |  Method resolution order:
+     |      ListView
+     |      MultipleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseListView
+     |      MultipleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Methods inherited from MultipleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response is overridden.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from MultipleObjectTemplateResponseMixin:
+     |  
+     |  template_name_suffix = '_list'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseListView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from MultipleObjectMixin:
+     |  
+     |  get_allow_empty(self)
+     |      Return ``True`` if the view should display empty lists and ``False``
+     |      if a 404 should be raised instead.
+     |  
+     |  get_context_data(self, *, object_list=None, **kwargs)
+     |      Get the context for this view.
+     |  
+     |  get_context_object_name(self, object_list)
+     |      Get the name of the item to be used in the context.
+     |  
+     |  get_ordering(self)
+     |      Return the field or fields to use for ordering the queryset.
+     |  
+     |  get_paginate_by(self, queryset)
+     |      Get the number of items to paginate by, or ``None`` for no pagination.
+     |  
+     |  get_paginate_orphans(self)
+     |      Return the maximum number of orphans extend the last page by when
+     |      paginating.
+     |  
+     |  get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, **kwargs)
+     |      Return an instance of the paginator for this view.
+     |  
+     |  get_queryset(self)
+     |      Return the list of items for this view.
+     |      
+     |      The return value must be an iterable and may be an instance of
+     |      `QuerySet` in which case `QuerySet` specific behavior will be enabled.
+     |  
+     |  paginate_queryset(self, queryset, page_size)
+     |      Paginate the queryset, if needed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from MultipleObjectMixin:
+     |  
+     |  allow_empty = True
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  ordering = None
+     |  
+     |  page_kwarg = 'page'
+     |  
+     |  paginate_by = None
+     |  
+     |  paginate_orphans = 0
+     |  
+     |  paginator_class = <class 'django.core.paginator.Paginator'>
+     |  
+     |  
+     |  queryset = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class MonthArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, BaseMonthArchiveView)
+     |  MonthArchiveView(**kwargs)
+     |  
+     |  List of objects published in a given month.
+     |  
+     |  Method resolution order:
+     |      MonthArchiveView
+     |      django.views.generic.list.MultipleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseMonthArchiveView
+     |      YearMixin
+     |      MonthMixin
+     |      BaseDateListView
+     |      django.views.generic.list.MultipleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      DateMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_archive_month'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response is overridden.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseMonthArchiveView:
+     |  
+     |  get_dated_items(self)
+     |      Return (date_list, items, extra_context) for this request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseMonthArchiveView:
+     |  
+     |  date_list_period = 'day'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from YearMixin:
+     |  
+     |  get_next_year(self, date)
+     |      Get the next valid year.
+     |  
+     |  get_previous_year(self, date)
+     |      Get the previous valid year.
+     |  
+     |  get_year(self)
+     |      Return the year for which this view should display data.
+     |  
+     |  get_year_format(self)
+     |      Get a year format string in strptime syntax to be used to parse the
+     |      year from url variables.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from YearMixin:
+     |  
+     |  year = None
+     |  
+     |  year_format = '%Y'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from MonthMixin:
+     |  
+     |  get_month(self)
+     |      Return the month for which this view should display data.
+     |  
+     |  get_month_format(self)
+     |      Get a month format string in strptime syntax to be used to parse the
+     |      month from url variables.
+     |  
+     |  get_next_month(self, date)
+     |      Get the next valid month.
+     |  
+     |  get_previous_month(self, date)
+     |      Get the previous valid month.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from MonthMixin:
+     |  
+     |  month = None
+     |  
+     |  month_format = '%b'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDateListView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  get_date_list(self, queryset, date_type=None, ordering='ASC')
+     |      Get a date list by calling `queryset.dates/datetimes()`, checking
+     |      along the way for empty lists that aren't allowed.
+     |  
+     |  get_date_list_period(self)
+     |      Get the aggregation period for the list of dates: 'year', 'month', or
+     |      'day'.
+     |  
+     |  get_dated_queryset(self, **lookup)
+     |      Get a queryset properly filtered according to `allow_future` and any
+     |      extra lookup kwargs.
+     |  
+     |  get_ordering(self)
+     |      Return the field or fields to use for ordering the queryset; use the
+     |      date field by default.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseDateListView:
+     |  
+     |  allow_empty = False
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  get_allow_empty(self)
+     |      Return ``True`` if the view should display empty lists and ``False``
+     |      if a 404 should be raised instead.
+     |  
+     |  get_context_data(self, *, object_list=None, **kwargs)
+     |      Get the context for this view.
+     |  
+     |  get_context_object_name(self, object_list)
+     |      Get the name of the item to be used in the context.
+     |  
+     |  get_paginate_by(self, queryset)
+     |      Get the number of items to paginate by, or ``None`` for no pagination.
+     |  
+     |  get_paginate_orphans(self)
+     |      Return the maximum number of orphans extend the last page by when
+     |      paginating.
+     |  
+     |  get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, **kwargs)
+     |      Return an instance of the paginator for this view.
+     |  
+     |  get_queryset(self)
+     |      Return the list of items for this view.
+     |      
+     |      The return value must be an iterable and may be an instance of
+     |      `QuerySet` in which case `QuerySet` specific behavior will be enabled.
+     |  
+     |  paginate_queryset(self, queryset, page_size)
+     |      Paginate the queryset, if needed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  ordering = None
+     |  
+     |  page_kwarg = 'page'
+     |  
+     |  paginate_by = None
+     |  
+     |  paginate_orphans = 0
+     |  
+     |  paginator_class = <class 'django.core.paginator.Paginator'>
+     |  
+     |  
+     |  queryset = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DateMixin:
+     |  
+     |  get_allow_future(self)
+     |      Return `True` if the view should be allowed to display objects from
+     |      the future.
+     |  
+     |  get_date_field(self)
+     |      Get the name of the date field to be used to filter by.
+     |  
+     |  uses_datetime_field = <django.utils.functional.cached_property object>
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DateMixin:
+     |  
+     |  allow_future = False
+     |  
+     |  date_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class RedirectView(View)
+     |  RedirectView(**kwargs)
+     |  
+     |  Provide a redirect on any GET request.
+     |  
+     |  Method resolution order:
+     |      RedirectView
+     |      View
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  delete(self, request, *args, **kwargs)
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  get_redirect_url(self, *args, **kwargs)
+     |      Return the URL redirect to. Keyword arguments from the URL pattern
+     |      match generating the redirect request are provided as kwargs to this
+     |      method.
+     |  
+     |  head(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  patch(self, request, *args, **kwargs)
+     |  
+     |  post(self, request, *args, **kwargs)
+     |  
+     |  put(self, request, *args, **kwargs)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  pattern_name = None
+     |  
+     |  permanent = False
+     |  
+     |  query_string = False
+     |  
+     |  url = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from View:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class TemplateView(TemplateResponseMixin, ContextMixin, View)
+     |  TemplateView(**kwargs)
+     |  
+     |  Render a template.
+     |  
+     |  Method resolution order:
+     |      TemplateView
+     |      TemplateResponseMixin
+     |      ContextMixin
+     |      View
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from TemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response() is overridden.
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from ContextMixin:
+     |  
+     |  get_context_data(self, **kwargs)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class TodayArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, BaseTodayArchiveView)
+     |  TodayArchiveView(**kwargs)
+     |  
+     |  List of objects published today.
+     |  
+     |  Method resolution order:
+     |      TodayArchiveView
+     |      django.views.generic.list.MultipleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseTodayArchiveView
+     |      BaseDayArchiveView
+     |      YearMixin
+     |      MonthMixin
+     |      DayMixin
+     |      BaseDateListView
+     |      django.views.generic.list.MultipleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      DateMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_archive_day'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response is overridden.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseTodayArchiveView:
+     |  
+     |  get_dated_items(self)
+     |      Return (date_list, items, extra_context) for this request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from YearMixin:
+     |  
+     |  get_next_year(self, date)
+     |      Get the next valid year.
+     |  
+     |  get_previous_year(self, date)
+     |      Get the previous valid year.
+     |  
+     |  get_year(self)
+     |      Return the year for which this view should display data.
+     |  
+     |  get_year_format(self)
+     |      Get a year format string in strptime syntax to be used to parse the
+     |      year from url variables.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from YearMixin:
+     |  
+     |  year = None
+     |  
+     |  year_format = '%Y'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from MonthMixin:
+     |  
+     |  get_month(self)
+     |      Return the month for which this view should display data.
+     |  
+     |  get_month_format(self)
+     |      Get a month format string in strptime syntax to be used to parse the
+     |      month from url variables.
+     |  
+     |  get_next_month(self, date)
+     |      Get the next valid month.
+     |  
+     |  get_previous_month(self, date)
+     |      Get the previous valid month.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from MonthMixin:
+     |  
+     |  month = None
+     |  
+     |  month_format = '%b'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DayMixin:
+     |  
+     |  get_day(self)
+     |      Return the day for which this view should display data.
+     |  
+     |  get_day_format(self)
+     |      Get a day format string in strptime syntax to be used to parse the day
+     |      from url variables.
+     |  
+     |  get_next_day(self, date)
+     |      Get the next valid day.
+     |  
+     |  get_previous_day(self, date)
+     |      Get the previous valid day.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DayMixin:
+     |  
+     |  day = None
+     |  
+     |  day_format = '%d'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDateListView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  get_date_list(self, queryset, date_type=None, ordering='ASC')
+     |      Get a date list by calling `queryset.dates/datetimes()`, checking
+     |      along the way for empty lists that aren't allowed.
+     |  
+     |  get_date_list_period(self)
+     |      Get the aggregation period for the list of dates: 'year', 'month', or
+     |      'day'.
+     |  
+     |  get_dated_queryset(self, **lookup)
+     |      Get a queryset properly filtered according to `allow_future` and any
+     |      extra lookup kwargs.
+     |  
+     |  get_ordering(self)
+     |      Return the field or fields to use for ordering the queryset; use the
+     |      date field by default.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseDateListView:
+     |  
+     |  allow_empty = False
+     |  
+     |  date_list_period = 'year'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  get_allow_empty(self)
+     |      Return ``True`` if the view should display empty lists and ``False``
+     |      if a 404 should be raised instead.
+     |  
+     |  get_context_data(self, *, object_list=None, **kwargs)
+     |      Get the context for this view.
+     |  
+     |  get_context_object_name(self, object_list)
+     |      Get the name of the item to be used in the context.
+     |  
+     |  get_paginate_by(self, queryset)
+     |      Get the number of items to paginate by, or ``None`` for no pagination.
+     |  
+     |  get_paginate_orphans(self)
+     |      Return the maximum number of orphans extend the last page by when
+     |      paginating.
+     |  
+     |  get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, **kwargs)
+     |      Return an instance of the paginator for this view.
+     |  
+     |  get_queryset(self)
+     |      Return the list of items for this view.
+     |      
+     |      The return value must be an iterable and may be an instance of
+     |      `QuerySet` in which case `QuerySet` specific behavior will be enabled.
+     |  
+     |  paginate_queryset(self, queryset, page_size)
+     |      Paginate the queryset, if needed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  ordering = None
+     |  
+     |  page_kwarg = 'page'
+     |  
+     |  paginate_by = None
+     |  
+     |  paginate_orphans = 0
+     |  
+     |  paginator_class = <class 'django.core.paginator.Paginator'>
+     |  
+     |  
+     |  queryset = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DateMixin:
+     |  
+     |  get_allow_future(self)
+     |      Return `True` if the view should be allowed to display objects from
+     |      the future.
+     |  
+     |  get_date_field(self)
+     |      Get the name of the date field to be used to filter by.
+     |  
+     |  uses_datetime_field = <django.utils.functional.cached_property object>
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DateMixin:
+     |  
+     |  allow_future = False
+     |  
+     |  date_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class UpdateView(django.views.generic.detail.SingleObjectTemplateResponseMixin, BaseUpdateView)
+     |  UpdateView(**kwargs)
+     |  
+     |  View for updating an object, with a response rendered by a template.
+     |  
+     |  Method resolution order:
+     |      UpdateView
+     |      django.views.generic.detail.SingleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseUpdateView
+     |      ModelFormMixin
+     |      FormMixin
+     |      django.views.generic.detail.SingleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      ProcessFormView
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_form'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. May not be
+     |      called if render_to_response() is overridden. Return the following list:
+     |      
+     |      * the value of ``template_name`` on the view (if provided)
+     |      * the contents of the ``template_name_field`` field on the
+     |        object instance that the view is operating upon (if available)
+     |      * ``<app_label>/<model_name><template_name_suffix>.html``
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectTemplateResponseMixin:
+     |  
+     |  template_name_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseUpdateView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |      Handle GET requests: instantiate a blank version of the form.
+     |  
+     |  post(self, request, *args, **kwargs)
+     |      Handle POST requests: instantiate a form instance with the passed
+     |      POST variables and then check if it's valid.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from ModelFormMixin:
+     |  
+     |  form_valid(self, form)
+     |      If the form is valid, save the associated model.
+     |  
+     |  get_form_class(self)
+     |      Return the form class to use in this view.
+     |  
+     |  get_form_kwargs(self)
+     |      Return the keyword arguments for instantiating the form.
+     |  
+     |  get_success_url(self)
+     |      Return the URL to redirect to after processing a valid form.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from ModelFormMixin:
+     |  
+     |  fields = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from FormMixin:
+     |  
+     |  form_invalid(self, form)
+     |      If the form is invalid, render the invalid form.
+     |  
+     |  get_context_data(self, **kwargs)
+     |      Insert the form into the context dict.
+     |  
+     |  get_form(self, form_class=None)
+     |      Return an instance of the form to be used in this view.
+     |  
+     |  get_initial(self)
+     |      Return the initial data to use for forms on this view.
+     |  
+     |  get_prefix(self)
+     |      Return the prefix to use for forms.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from FormMixin:
+     |  
+     |  form_class = None
+     |  
+     |  initial = {}
+     |  
+     |  prefix = None
+     |  
+     |  success_url = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  get_context_object_name(self, obj)
+     |      Get the name to use for the object.
+     |  
+     |  get_object(self, queryset=None)
+     |      Return the object the view is displaying.
+     |      
+     |      Require `self.queryset` and a `pk` or `slug` argument in the URLconf.
+     |      Subclasses can override this to return any object.
+     |  
+     |  get_queryset(self)
+     |      Return the `QuerySet` that will be used to look up the object.
+     |      
+     |      This method is called by the default implementation of get_object() and
+     |      may not be called if get_object() is overridden.
+     |  
+     |  get_slug_field(self)
+     |      Get the name of a slug field to be used to look up by slug.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.detail.SingleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  pk_url_kwarg = 'pk'
+     |  
+     |  query_pk_and_slug = False
+     |  
+     |  queryset = None
+     |  
+     |  slug_field = 'slug'
+     |  
+     |  slug_url_kwarg = 'slug'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from ProcessFormView:
+     |  
+     |  put(self, *args, **kwargs)
+     |      # PUT is a valid HTTP verb for creating (with a known URL) or editing an
+     |      # object, note that browsers only support POST for now.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class View(builtins.object)
+     |  View(**kwargs)
+     |  
+     |  Intentionally simple parent class for all views. Only implements
+     |  dispatch-by-method and simple sanity checking.
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods defined here:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class WeekArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, BaseWeekArchiveView)
+     |  WeekArchiveView(**kwargs)
+     |  
+     |  List of objects published in a given week.
+     |  
+     |  Method resolution order:
+     |      WeekArchiveView
+     |      django.views.generic.list.MultipleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseWeekArchiveView
+     |      YearMixin
+     |      WeekMixin
+     |      BaseDateListView
+     |      django.views.generic.list.MultipleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      DateMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_archive_week'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response is overridden.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseWeekArchiveView:
+     |  
+     |  get_dated_items(self)
+     |      Return (date_list, items, extra_context) for this request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from YearMixin:
+     |  
+     |  get_next_year(self, date)
+     |      Get the next valid year.
+     |  
+     |  get_previous_year(self, date)
+     |      Get the previous valid year.
+     |  
+     |  get_year(self)
+     |      Return the year for which this view should display data.
+     |  
+     |  get_year_format(self)
+     |      Get a year format string in strptime syntax to be used to parse the
+     |      year from url variables.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from YearMixin:
+     |  
+     |  year = None
+     |  
+     |  year_format = '%Y'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from WeekMixin:
+     |  
+     |  get_next_week(self, date)
+     |      Get the next valid week.
+     |  
+     |  get_previous_week(self, date)
+     |      Get the previous valid week.
+     |  
+     |  get_week(self)
+     |      Return the week for which this view should display data.
+     |  
+     |  get_week_format(self)
+     |      Get a week format string in strptime syntax to be used to parse the
+     |      week from url variables.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from WeekMixin:
+     |  
+     |  week = None
+     |  
+     |  week_format = '%U'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDateListView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  get_date_list(self, queryset, date_type=None, ordering='ASC')
+     |      Get a date list by calling `queryset.dates/datetimes()`, checking
+     |      along the way for empty lists that aren't allowed.
+     |  
+     |  get_date_list_period(self)
+     |      Get the aggregation period for the list of dates: 'year', 'month', or
+     |      'day'.
+     |  
+     |  get_dated_queryset(self, **lookup)
+     |      Get a queryset properly filtered according to `allow_future` and any
+     |      extra lookup kwargs.
+     |  
+     |  get_ordering(self)
+     |      Return the field or fields to use for ordering the queryset; use the
+     |      date field by default.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseDateListView:
+     |  
+     |  allow_empty = False
+     |  
+     |  date_list_period = 'year'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  get_allow_empty(self)
+     |      Return ``True`` if the view should display empty lists and ``False``
+     |      if a 404 should be raised instead.
+     |  
+     |  get_context_data(self, *, object_list=None, **kwargs)
+     |      Get the context for this view.
+     |  
+     |  get_context_object_name(self, object_list)
+     |      Get the name of the item to be used in the context.
+     |  
+     |  get_paginate_by(self, queryset)
+     |      Get the number of items to paginate by, or ``None`` for no pagination.
+     |  
+     |  get_paginate_orphans(self)
+     |      Return the maximum number of orphans extend the last page by when
+     |      paginating.
+     |  
+     |  get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, **kwargs)
+     |      Return an instance of the paginator for this view.
+     |  
+     |  get_queryset(self)
+     |      Return the list of items for this view.
+     |      
+     |      The return value must be an iterable and may be an instance of
+     |      `QuerySet` in which case `QuerySet` specific behavior will be enabled.
+     |  
+     |  paginate_queryset(self, queryset, page_size)
+     |      Paginate the queryset, if needed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  ordering = None
+     |  
+     |  page_kwarg = 'page'
+     |  
+     |  paginate_by = None
+     |  
+     |  paginate_orphans = 0
+     |  
+     |  paginator_class = <class 'django.core.paginator.Paginator'>
+     |  
+     |  
+     |  queryset = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DateMixin:
+     |  
+     |  get_allow_future(self)
+     |      Return `True` if the view should be allowed to display objects from
+     |      the future.
+     |  
+     |  get_date_field(self)
+     |      Get the name of the date field to be used to filter by.
+     |  
+     |  uses_datetime_field = <django.utils.functional.cached_property object>
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DateMixin:
+     |  
+     |  allow_future = False
+     |  
+     |  date_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+    
+    class YearArchiveView(django.views.generic.list.MultipleObjectTemplateResponseMixin, BaseYearArchiveView)
+     |  YearArchiveView(**kwargs)
+     |  
+     |  List of objects published in a given year.
+     |  
+     |  Method resolution order:
+     |      YearArchiveView
+     |      django.views.generic.list.MultipleObjectTemplateResponseMixin
+     |      django.views.generic.base.TemplateResponseMixin
+     |      BaseYearArchiveView
+     |      YearMixin
+     |      BaseDateListView
+     |      django.views.generic.list.MultipleObjectMixin
+     |      django.views.generic.base.ContextMixin
+     |      DateMixin
+     |      django.views.generic.base.View
+     |      builtins.object
+     |  
+     |  Data and other attributes defined here:
+     |  
+     |  template_name_suffix = '_archive_year'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectTemplateResponseMixin:
+     |  
+     |  get_template_names(self)
+     |      Return a list of template names to be used for the request. Must return
+     |      a list. May not be called if render_to_response is overridden.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  render_to_response(self, context, **response_kwargs)
+     |      Return a response, using the `response_class` for this view, with a
+     |      template rendered with the given context.
+     |      
+     |      Pass response_kwargs to the constructor of the response class.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.TemplateResponseMixin:
+     |  
+     |  content_type = None
+     |  
+     |  response_class = <class 'django.template.response.TemplateResponse'>
+     |      An HTTP response class with a string as content.
+     |      
+     |      This content that can be read, appended to, or replaced.
+     |  
+     |  template_engine = None
+     |  
+     |  template_name = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseYearArchiveView:
+     |  
+     |  get_dated_items(self)
+     |      Return (date_list, items, extra_context) for this request.
+     |  
+     |  get_make_object_list(self)
+     |      Return `True` if this view should contain the full list of objects in
+     |      the given year.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseYearArchiveView:
+     |  
+     |  date_list_period = 'month'
+     |  
+     |  make_object_list = False
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from YearMixin:
+     |  
+     |  get_next_year(self, date)
+     |      Get the next valid year.
+     |  
+     |  get_previous_year(self, date)
+     |      Get the previous valid year.
+     |  
+     |  get_year(self)
+     |      Return the year for which this view should display data.
+     |  
+     |  get_year_format(self)
+     |      Get a year format string in strptime syntax to be used to parse the
+     |      year from url variables.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from YearMixin:
+     |  
+     |  year = None
+     |  
+     |  year_format = '%Y'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseDateListView:
+     |  
+     |  get(self, request, *args, **kwargs)
+     |  
+     |  get_date_list(self, queryset, date_type=None, ordering='ASC')
+     |      Get a date list by calling `queryset.dates/datetimes()`, checking
+     |      along the way for empty lists that aren't allowed.
+     |  
+     |  get_date_list_period(self)
+     |      Get the aggregation period for the list of dates: 'year', 'month', or
+     |      'day'.
+     |  
+     |  get_dated_queryset(self, **lookup)
+     |      Get a queryset properly filtered according to `allow_future` and any
+     |      extra lookup kwargs.
+     |  
+     |  get_ordering(self)
+     |      Return the field or fields to use for ordering the queryset; use the
+     |      date field by default.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseDateListView:
+     |  
+     |  allow_empty = False
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  get_allow_empty(self)
+     |      Return ``True`` if the view should display empty lists and ``False``
+     |      if a 404 should be raised instead.
+     |  
+     |  get_context_data(self, *, object_list=None, **kwargs)
+     |      Get the context for this view.
+     |  
+     |  get_context_object_name(self, object_list)
+     |      Get the name of the item to be used in the context.
+     |  
+     |  get_paginate_by(self, queryset)
+     |      Get the number of items to paginate by, or ``None`` for no pagination.
+     |  
+     |  get_paginate_orphans(self)
+     |      Return the maximum number of orphans extend the last page by when
+     |      paginating.
+     |  
+     |  get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, **kwargs)
+     |      Return an instance of the paginator for this view.
+     |  
+     |  get_queryset(self)
+     |      Return the list of items for this view.
+     |      
+     |      The return value must be an iterable and may be an instance of
+     |      `QuerySet` in which case `QuerySet` specific behavior will be enabled.
+     |  
+     |  paginate_queryset(self, queryset, page_size)
+     |      Paginate the queryset, if needed.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.list.MultipleObjectMixin:
+     |  
+     |  context_object_name = None
+     |  
+     |  model = None
+     |  
+     |  ordering = None
+     |  
+     |  page_kwarg = 'page'
+     |  
+     |  paginate_by = None
+     |  
+     |  paginate_orphans = 0
+     |  
+     |  paginator_class = <class 'django.core.paginator.Paginator'>
+     |  
+     |  
+     |  queryset = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.ContextMixin:
+     |  
+     |  extra_context = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from DateMixin:
+     |  
+     |  get_allow_future(self)
+     |      Return `True` if the view should be allowed to display objects from
+     |      the future.
+     |  
+     |  get_date_field(self)
+     |      Get the name of the date field to be used to filter by.
+     |  
+     |  uses_datetime_field = <django.utils.functional.cached_property object>
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from DateMixin:
+     |  
+     |  allow_future = False
+     |  
+     |  date_field = None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from django.views.generic.base.View:
+     |  
+     |  __init__(self, **kwargs)
+     |      Constructor. Called in the URLconf; can contain helpful extra
+     |      keyword arguments, and other things.
+     |  
+     |  dispatch(self, request, *args, **kwargs)
+     |  
+     |  http_method_not_allowed(self, request, *args, **kwargs)
+     |  
+     |  options(self, request, *args, **kwargs)
+     |      Handle responding to requests for the OPTIONS HTTP verb.
+     |  
+     |  setup(self, request, *args, **kwargs)
+     |      Initialize attributes shared by all view methods.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from django.views.generic.base.View:
+     |  
+     |  as_view(**initkwargs) from builtins.type
+     |      Main entry point for a request-response process.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from django.views.generic.base.View:
+     |  
+     |  http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', ...
+
+DATA
+    __all__ = ['View', 'TemplateView', 'RedirectView', 'ArchiveIndexView',...
+
+FILE
+    /home/rasel/Django Projects/instagram/lib/python3.8/site-packages/django/views/generic/__init__.py
+
+

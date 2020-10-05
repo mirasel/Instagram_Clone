@@ -112,6 +112,7 @@ body{
     white-space: nowrap;
 }
 
+
 .menu-item:not(:first-child){
     margin-left: 22px
 }
@@ -125,11 +126,29 @@ body{
     padding: 0;
 }
 
+.menuitemimg{
+    height: 22px;
+    width: 22px;
+}
 
-img.profile{
-    width: 24px;
-    height:24px;
+.profile{
     border-radius:50%;
+}
+
+.propicactive{
+    border: 1px solid rgba(var(--i1d,38,38,38),1);
+    border-radius: 50%;
+    height: 28px;
+    left: 50%;
+    position: absolute;
+    top: 46%;
+    transform: translate(-50%,-50%);
+    width: 28px;
+    z-index:-1;
+}
+
+.nav_dropdown{
+    top: 15px;
 }
 
 footer{
@@ -139,7 +158,7 @@ footer{
     padding: 0 20px;
 }
 
-div,footer,nav,section,main{
+div,footer,nav,section,main,article{
     -webkit-box-align: stretch;
     align-items: stretch;
     border: 0 solid #000;
@@ -150,5 +169,108 @@ div,footer,nav,section,main{
     flex-direction: column;
     flex-shrink: 0;
     margin: 0;
+    padding: 0;
     position: relative;
+}
+
+a, a.hover {
+    text-decoration: none !important;
+}
+
+.window{
+    display: flex;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.dropmenu{
+    transform-origin: top center;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 75ms linear,transform 38ms ease-out,-webkit-transform 38ms ease-out;
+    background: rgba(var(--d87,255,255,255),1);
+    border-radius: 6px;
+    box-shadow: 0 0 5px 1px rgba(var(--jb7,0,0,0),.0975);
+    position: absolute;
+    z-index: 3;
+}
+
+.dropmenubox{
+    bottom: 0;
+    top: -6px;
+    background: rgba(var(--d87,255,255,255),1);
+    border: 1px solid rgba(var(--f23,255,255,255),1);
+    box-shadow: 0 0 5px 1px rgba(var(--jb7,0,0,0),.0975);
+    height: 14px;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 14px;
+}
+
+.dropitemsdiv{
+    background: rgba(var(--d87,255,255,255),1);
+    border-radius: 6px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+}
+
+.dropitem{
+    cursor: pointer;
+    outline: 0;
+}
+
+.logoutline{
+    background-color: rgba(var(--b38,219,219,219),1);
+    border: 0;
+    height: 1px;
+    margin: 0;
+    width: 100%;
+}
+
+.profile_logout{
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-box-flex: 0;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    align-content: stretch;
+    box-sizing: border-box;
+}
+
+.profileicon{
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    margin-right: 12px;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.profiletext{
+    color : black;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    align-content: stretch;
 }

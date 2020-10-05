@@ -6,7 +6,7 @@
 {% block title %}{{user_details.username}}{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'instagram/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'instagram/css/profile.css' %}">
 {% endblock %}
 
 {% block profilephoto %} {{propic.url}} {% endblock %}
@@ -15,7 +15,7 @@
     <div class="content-div">
         <header class="profile-header">
             <div class="propic-div">
-                {% if user.username == user_details.username%}
+                {% if request.user.username == object.username%}
                     {%if profile.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
                         <button class="propic-button" title="change">
                             <img class="propic" src="{{profile.profile_pic.url}}" alt="change pro pic" />
@@ -32,9 +32,9 @@
             </div>
             <section class="profile-info">
                 <div class="first_info">
-                    <h2 class="u_name">{{user_details.username}}</h2>
+                    <h2 class="u_name">{{object.username}}</h2>
                     <div class="edit_profile">
-                        {% if user.username == user_details.username%}
+                        {% if request.user.username == object.username%}
                             <a class="edit" href="{%url 'accounts:edit'%}">Edit Profile</a>
                         {% endif %}
                     </div>
@@ -48,21 +48,32 @@
                                 class="list_number">{{profile.following}}</span> following</a></li>
                 </ul>
                 <div class="third_info">
-                    <h1 class="fullname">{{user_details.first_name}}</h1><br>
+                    <h1 class="fullname">{{object.first_name}}</h1><br>
                     <span class="bio">{{profile.bio}}</span>
                 </div>
             </section>
         </header>
 
-        <div>
-            <a href="#">POSTS</a>
-            {% if user.username == user_details.username%}
-            <a href="#">Upload</a>
+        <div class="post_and_upload">
+            <div class="post_upload_links" >POSTS</div>
+            {% if request.user.username == object.username%}
+            <div class="post_upload_links" >UPLOAD</div>
             {% endif %}
         </div>
 
         <div class="posts">
             {% include 'instagram/snippets/posts.html' %}
+        </div>
+        <div class='upload none'>
+            <form action="{% url 'post:upload_post' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <img class='none' id="Uploadimg" src="" alt="" height="200px" width="200px"><br>
+                <label for="post_img">Upload Photo</label>
+                <input type="file" name="post_img" onchange="readimg(this) " required><br>
+                <label for="caption">Description</label>
+                <textarea name="caption" cols="30" rows="2"></textarea><br>
+                <input type="submit" value="Upload">
+            </form>
         </div>
     </div>
 {% endblock %}

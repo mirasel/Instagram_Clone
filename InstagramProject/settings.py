@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'instagram',
     'post',
 
+    #third party app
+    'mathfilters',
+
     #build in apps
     'django.contrib.admin',
     'django.contrib.auth',

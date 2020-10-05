@@ -147,8 +147,12 @@ span.list_text,a.list_text{
     vertical-align: baseline;
 }
 
-a:hover{
+a.list_text:hover{
     color: rgba(var(--i1d,38,38,38),1)!important;
+}
+
+a{
+    color: inherit;
     text-decoration: none !important;
 }
 
@@ -272,3 +276,62 @@ button.cancel{
     border-bottom-right-radius: 12px;
     color: inherit;
 }
+
+.post_and_upload{
+    -webkit-box-align: center;
+    align-items: center;
+    border-top: 1px solid rgba(var(--b38,219,219,219),1);
+    color: #8e8e8e;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    font-size: 12px;
+    font-weight: 600;
+    -webkit-box-pack: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.post_upload_links{
+    cursor: pointer;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 52px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+div.post_upload_links{
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgba(var(--f52,142,142,142),1);
+}
+
+.post_upload_links:not(:last-child) {
+    margin-right: 60px;
+}
+
+.post_upload_active{
+    border-top: 1px solid rgba(var(--i1d,38,38,38),1);
+    margin-top: -1px;
+}
+
+div.post_upload_active{
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgba(var(--i1d,38,38,38),1);
+}
+
+.upload{
+    flex-direction: row;
+}
+
+.none{
+    display: none !important;
+}
+

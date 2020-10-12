@@ -8,7 +8,7 @@
     <title>{% block title %}{% endblock %}</title>
     {% block css %} {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     {% block headjs %}{% endblock %}
@@ -50,8 +50,7 @@
                                 </div>
                                 <div class="menu-item">
                                     <div class=""></div>
-                                    <img class="profile menuitemimg" id="propic"
-                                        src="{%block profilephoto%}{%endblock%}" alt="{{user}}" />
+                                    <img class="profile menuitemimg" id="propic" src="{{ user.profiles.first.profile_pic.url }}" alt="{{user}}"/>
                                     <div>
                                         <div class="nav_dropdown" style="margin-left: -180px;"></div>
                                     </div>
@@ -67,6 +66,7 @@
             </main>
             <footer>
                 <div>
+                    this is footer
                 </div>
             </footer>
         </section>
@@ -131,7 +131,7 @@
 
         function dropmenuhide(navitem){
             $('body').on('click','div#window',function(){
-                console.log('done')
+                $('.common_overlay').remove();
                 if (navitem!=='propic')
                     $('img#propic').prev().removeClass('propicactive')
                 $('div.nav_dropdown').empty()

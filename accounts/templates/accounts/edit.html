@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {%load static%}
 {%block title%}Edit Profile • Instagram{%endblock%}
-{%block profilephoto%} {{p.profile_pic.url}} {%endblock%}
 {%block content%}
     {%if p.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
         <img src="{{p.profile_pic.url}}" alt="" height="200px" width="200px"/>

@@ -29,7 +29,7 @@ def update_user_total_post(process,user):
 
 
 class UserPost(models.Model):
-    uploader        = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    uploader        = models.ForeignKey(profile,related_name='posts',on_delete=models.CASCADE)
     title           = models.TextField(max_length=50,blank=True)
     image           = models.ImageField(upload_to=get_post_image,null=False,blank=False)
     caption         = models.TextField(max_length=2000,blank=True)
@@ -63,8 +63,8 @@ pre_save.connect(pre_save_user_post,sender=UserPost)
 
 
 class PostComment(models.Model):
-    post            = models.ForeignKey(UserPost,on_delete=models.CASCADE)
-    commenter       = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    post            = models.ForeignKey(UserPost, related_name='comments', on_delete=models.CASCADE)
+    commenter       = models.ForeignKey(profile,on_delete=models.CASCADE)
     comment         = models.TextField(max_length=2000,blank=False,null=False)
     date_published  = models.DateTimeField(auto_now_add=True,verbose_name='Date Published')
 

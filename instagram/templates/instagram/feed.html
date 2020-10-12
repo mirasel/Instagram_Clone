@@ -5,7 +5,6 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'instagram/css/feed.css' %}">
 {% endblock %}
-{%block profilephoto%} {{propic.url}} {%endblock%}
 {%block content%}
     <section class="main_feed">
         <div class="post_list">
@@ -17,7 +16,7 @@
                                 
                             </header>
                             <div><img src="{{posts.image.url}}" alt="" height="400px" width="400px"></div>
-                            <div>{{ posts.date_published.date }}
+                            <div>{{ posts.date_published.date | date:'F d,Y' }}
                                 {% if posts.total_likes %}
                                     <div>  
                                         <p>

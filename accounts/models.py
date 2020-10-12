@@ -11,7 +11,7 @@ class profile(models.Model):
         ('f', 'Female'),
         ('ns', 'Prefer Not To Say'),
     ]
-    user           = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    user           = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='profiles', on_delete=models.CASCADE)
     bio            = models.TextField(max_length=150,blank=True)
     gender         = models.CharField(max_length=2,choices=GENDER_CHOICES,default='ns')
     profile_pic    = models.ImageField(upload_to=get_image_path,

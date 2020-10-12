@@ -8,55 +8,52 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'instagram/css/profile.css' %}">
 {% endblock %}
-
-{% block profilephoto %} {{propic.url}} {% endblock %}
-
 {% block content %}
     <div class="content-div">
         <header class="profile-header">
             <div class="propic-div">
-                {% if request.user.username == object.username%}
-                    {%if profile.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
+                {% if request.user.username == object.user.username%}
+                    {%if object.profile_pic.url != '/media/defaultPic/default_profile_pic.jpg'%}
                         <button class="propic-button" title="change">
-                            <img class="propic" src="{{profile.profile_pic.url}}" alt="change pro pic" />
+                            <img class="propic" src="{{object.profile_pic.url}}" alt="change pro pic" />
                         </button>
                     {%else%}
                         <button class="propic-button" title="add">
-                            <img class="propic" src="{{profile.profile_pic.url}}" alt="add pro pic" />
+                            <img class="propic" src="{{object.profile_pic.url}}" alt="add pro pic" />
                         </button>
                     {%endif%}
                     <div></div>
                 {% else %}
-                    <img class="propic" src="{{profile.profile_pic.url}}" alt="{{profile}}" />
+                    <img class="propic" src="{{object.profile_pic.url}}" alt="{{object}}" />
                 {% endif %}
             </div>
             <section class="profile-info">
                 <div class="first_info">
-                    <h2 class="u_name">{{object.username}}</h2>
+                    <h2 class="u_name">{{object.user.username}}</h2>
                     <div class="edit_profile">
-                        {% if request.user.username == object.username%}
+                        {% if request.user.username == object.user.username%}
                             <a class="edit" href="{%url 'accounts:edit'%}">Edit Profile</a>
                         {% endif %}
                     </div>
                 </div>
                 <ul class="second_info">
                     <li class="second_info_list"><span class="list_text"><span
-                                class="list_number">{{profile.total_posts}}</span> posts</span></li>
+                                class="list_number">{{object.total_posts}}</span> posts</span></li>
                     <li class="second_info_list"><a href="#" class="list_text"><span
-                                class="list_number">{{profile.followers}}</span> followers</a></li>
+                                class="list_number">{{object.followers}}</span> followers</a></li>
                     <li class="second_info_list"><a href="#" class="list_text"><span
-                                class="list_number">{{profile.following}}</span> following</a></li>
+                                class="list_number">{{object.following}}</span> following</a></li>
                 </ul>
                 <div class="third_info">
-                    <h1 class="fullname">{{object.first_name}}</h1><br>
-                    <span class="bio">{{profile.bio}}</span>
+                    <h1 class="fullname">{{object.user.first_name}}</h1><br>
+                    <span class="bio">{{object.bio}}</span>
                 </div>
             </section>
         </header>
 
         <div class="post_and_upload">
             <div class="post_upload_links" >POSTS</div>
-            {% if request.user.username == object.username%}
+            {% if request.user.username == object.user.username%}
             <div class="post_upload_links" >UPLOAD</div>
             {% endif %}
         </div>

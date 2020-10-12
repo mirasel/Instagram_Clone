@@ -10,16 +10,17 @@ def get_profile_details(user):
     p = profile.objects.get(user=user)
     return p
 
-def get_nav_propic(user):
-    navpropic = profile.objects.get(user=user)
-    return navpropic.profile_pic
+# def get_nav_propic(user):
+#     # navpropic = profile.objects.get(user=user)
+#     # return navpropic.profile_pic
+#     pass
 
-def get_user_posts(user):
-    try:
-        posts = UserPost.objects.filter(Q(slug__startswith=user))
-        return posts
-    except UserPost.DoesNotExist:
-        return []
+# def get_user_posts(user):
+#     try:
+#         posts = UserPost.objects.filter(Q(slug__startswith=user))
+#         return posts
+#     except UserPost.DoesNotExist:
+#         return []
 
 #--------end of getting staff------------
 
@@ -61,25 +62,28 @@ class Feed(generic.ListView):
 
     def get(self,request,*args,**kwargs):
         if self.request.user.is_authenticated:
-            self.extra_context = {
-                'propic'        : get_nav_propic(self.request.user),
-            }
+            # self.extra_context = {
+            #     'propic'        : get_nav_propic(self.request.user),
+            # }
             return super(Feed,self).get(request,*args,**kwargs)
         else:
             return redirect('accounts:login')
 
 class ProfileDetailView(generic.DetailView):
     template_name = 'instagram/profile.html'
-    slug_field = 'username'
-    slug_url_kwarg = 'name'
-    model = User
     
-    def get_context_data(self, **kwargs):
-        context = super(ProfileDetailView, self).get_context_data(**kwargs)
-        userobj = self.get_object()
-        context['profile'] = get_profile_details(userobj)
-        context['propic'] = get_nav_propic(self.request.user)
-        context['posts'] = get_user_posts(self.kwargs.get('name'))
-        return context
+    def get_object(self):
+        slug = self.kwargs.get('name')
+        obj = get_object_or_404(User,username=slug)
+        obj = get_object_or_404(profile,user=obj)
+        return obj
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super(ProfileDetailView, self).get_context_data(**kwargs)
+    #     userobj = self.get_object()
+    #     # context['profile'] = get_profile_details(userobj)
+    #     context['propic'] = get_nav_propic(self.request.user)
+    #     # context['posts'] = get_user_posts(self.kwargs.get('name'))
+    #     return context
     
 

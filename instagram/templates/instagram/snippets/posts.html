@@ -1,5 +1,5 @@
-{% if posts %}
-    {% for post in posts %}
+{% if object.posts.all %}
+    {% for post in object.posts.all %}
         <div class="post-item">
             <a href="{% url 'post:post_details' post.slug %}">
                 <img src="{{post.image.url}}" alt="{{post}}" height="200px" width="200px">

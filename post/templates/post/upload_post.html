@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} Upload Post {% endblock %}
-{% block profilephoto %} {{ propic.url }} {% endblock %}
 {% block content %}
     <div>
         <form action="{% url 'post:upload_post' %}" method="post" enctype="multipart/form-data">

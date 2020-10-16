@@ -10,25 +10,165 @@
         <div class="post_list">
             <div>
                 <div style="flex-direction: column; padding-top: 0px;">
-                    {% for posts in userpost_list %}
+                    {% for post in userpost_list %}
                         <article class="post_article">
-                            <header class="post_head">
-                                
+                            <header class="post_header">
+                                <div class="pd_header_propic_div">
+                                    <canvas height="42" style="position: absolute; top: -5px; left: -5px; width: 42px; height: 42px;user-select: none;" width="42"></canvas>
+                                    <a class="header_propiclink" href="{% url 'instagram:profile' post.uploader %}">
+                                        <img class="header_propic" src="{{post.uploader.profile_pic.url}}" alt="{{post.uploader}}'s profile picture" >
+                                    </a>
+                                </div>
+                                <div class="pd_header_username_div">
+                                    <div class="header_username">
+                                        <span class="header_username_span">
+                                            <a class="header_usernamelink" href="{% url 'instagram:profile' post.uploader %}">{{ post.uploader }}</a>
+                                        </span>
+                                    </div>
+                                </div>
                             </header>
-                            <div><img src="{{posts.image.url}}" alt="" height="400px" width="400px"></div>
-                            <div>{{ posts.date_published.date | date:'F d,Y' }}
-                                {% if posts.total_likes %}
-                                    <div>  
-                                        <p>
-                                            <strong>
-                                                {{ posts.likes.first }}
-                                            </strong> 
-                                            {% if posts.total_likes|sub:1 %}and {{ posts.total_likes|sub:1 }} others{% endif %} likes it
-                                        </p>
-                                        
+                            <div class="post_option">
+                                <button class="post_option_button">
+                                    <div class="post_option_div">
+                                        <svg aria-label="More options" class="icon" fill="#262626" height="16" viewBox="0 0 48 48" width="16">
+                                            <circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle>
+                                            <circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle>
+                                            <circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="pd_postimage">
+                                <div class="postimage_div">
+                                    <img class="postimage" src="{{post.image.url}}" alt="Photo by {{ post.uploader }}">
+                                </div>
+                            </div>
+                            <div class="pd_post_likecomment">
+                                <!-- like comment icon -->
+                                <section class="post_likeicon_section">
+                                    <!-- love -->
+                                    <span class="love-span">
+                                        <button class="icon-button" id="icon-love">
+                                            <div class="icon-div" id="love-div">
+                                                <span class="love-span2">
+                                                    {% if user in post.likes.all %}
+                                                        <svg aria-label="Unlike" id="love" class="icon" fill="#ed4956" height="24" viewBox="0 0 48 48" width="24">
+                                                            <path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 
+                                                            10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 
+                                                            7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
+                                                        </svg> 
+                                                    {% else %}
+                                                        <svg class="icon" id="love" aria-label="Like" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                                                            <path d="M34.6 6.1c5.7 0 10.4  5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 
+                                                            41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 
+                                                            1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 
+                                                            5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 
+                                                            2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 
+                                                            1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
+                                                        </svg>
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </button>
+                                    </span>
+                                    <!-- comment -->
+                                    <span class="comment-span">
+                                        <button class="icon-button" id="icon-comment">
+                                            <div class="icon-div">
+                                                <svg aria-label="Comment" class="icon" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                                                    <path clip-rule="evenodd" d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 
+                                                    .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 
+                                                    1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 
+                                                    12.7 44.5 24z" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </span>
+                                    <!-- send -->
+                                    <button class="icon-button">
+                                        <div class="icon-div">
+                                            <svg aria-label="Share Post" class="icon" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                                                <path d="M47.8 3.8c-.3-.5-.8-.8-1.3-.8h-45C.9 3.1.3 3.5.1 4S0 5.2.4 5.7l15.9 15.6 5.5 22.6c.1.6.6 1 
+                                                1.2 1.1h.2c.5 0 1-.3 1.3-.7l23.2-39c.4-.4.4-1 .1-1.5zM5.2 6.1h35.5L18 18.7 5.2 6.1zm18.7 33.6l-4.4-18.4L42.4 
+                                                8.6 23.9 39.7z"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </section>
+            
+                                <!-- who likes it -->
+                                
+                                {% if post.total_likes %}
+                                    <section class="post_likes">
+                                        <div class="post_likes_div">
+                                            <div class="first_liker_propic_div">
+                                                <div class="first_liker_propic_div2">
+                                                    <span class="first_liker_propic_span">
+                                                        <img class="first_liker_propic" src="{{post.likes.last.profiles.first.profile_pic.url}}" alt="{{post.likes.last}}'s propic"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="who_likes_it">Liked by <span class="first_liker_span"><a class="first_liker_prolink" href="{% url 'instagram:profile' post.likes.last %}">{{ post.likes.last }}</a></span>{% if post.total_likes|sub:1 %} and <button class="total_liker_button"><span>{{ post.total_likes|sub:1 }}</span> other{{ post.total_likes|sub:1|pluralize }}</button>{% endif %}</div>
+                                        </div>
+                                    </section>
+                                {% endif %}
+                                    
+                                <!-- comment section -->
+                                {% if post.caption or post.comments.count %}
+                                    <div class="post_commentsbox">
+                                        <div class="common_comment_class common_comment_class2">
+                                            {% if post.caption %}
+                                                <div id="comment-div_{{post.id}}" class="common_comment_class common_comment_class2 amb">
+                                                    <div class="main_comment_div">
+                                                        <span class="commenter_span"><a class="commenter_link" href="{% url 'instagram:profile' post.uploader %}">{{ post.uploader }}</a></span>
+                                                        <span class="comment_span"><span>{{ post.caption }}</span></span>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if post.comments.count %}
+                                                <div>
+                                                    {% if post.comments.count >= 3 %}
+                                                        <div class="common_comment_class common_comment_class2 amb">
+                                                            <a class="view_all_comment_link" href="{% url 'post:post_details' post.slug %}">View all <span>{{ post.comments.count }}</span> comments</a>
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="common_comment_class first_last_comment_div amb">
+                                                        <div class="main_comment_div">
+                                                            <span class="commenter_span"><a class="commenter_link" href="{% url 'instagram:profile' post.comments.first.commenter %}">{{ post.comments.first.commenter }}</a></span>
+                                                            <span class="comment_span"><span>{{ post.comments.first.comment }}</span></span>
+                                                        </div>
+                                                    </div>
+                                                    {% if post.comments.count >= 2 %}
+                                                        <div class="common_comment_class first_last_comment_div amb">
+                                                            <div class="main_comment_div">
+                                                                <span class="commenter_span"><a class="commenter_link" href="{% url 'instagram:profile' post.comments.last.commenter %}">{{ post.comments.last.commenter }}</a></span>
+                                                                <span class="comment_span"><span>{{ post.comments.last.comment }}</span></span>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                 {% endif %}
-                                <p><strong>{{ posts.uploader }}</strong> {{ posts.caption }}</p>
+                                <!-- date -->
+                                <div class="post_time_div">
+                                    <span class="time_span">
+                                        <time class="time" datetime="{{ post.date_published }}">{{ post.date_published.date | date:'F d, Y'}}</time>
+                                    </span>
+                                </div>
+            
+                                <!-- comment box -->
+                                <section class="post_comment_input">
+                                    <div class="comment_input_div">
+                                        <form class="comment_input_form" id="comment_form" method="POST">
+                                            {% csrf_token %}
+                                            <textarea class="comment_textarea" name="comment" id="comment" placeholder="Add a comment..."></textarea>
+                                            <!-- <input type="hidden" name="slug" id="slug" value="{{post.slug}}"> -->
+                                            <button class="comment_post_button" type="submit" disabled>Post</button>
+                                        </form>
+                                    </div>
+                                </section>
                             </div>
                         </article>
                     {% endfor %}
@@ -36,7 +176,15 @@
             </div>
         </div>
         <div class="user_list">
-            hello bro
+            <div class="loggedin_user">
+                <div class="loggedin_user_div">
+                    <div class="loggedin_user_propic_div"><div></div></div>
+                    <div class="loggedin_user_name">
+                        <div class="loggedin_user_name2"><div><a href="{% url 'instagram:profile' user %}">{{ user }}</a></div></div>
+                        <div class="loggedin_user_name2 loggedin_user_fullname"><div><div>{{ user.first_name }}</div></div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

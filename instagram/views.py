@@ -6,9 +6,9 @@ from django.db.models import Q
 from django.views import generic
 
 #--------getting staff from database------------
-def get_profile_details(user):
-    p = profile.objects.get(user=user)
-    return p
+# def get_profile_details(user):
+#     p = profile.objects.get(user=user)
+#     return p
 
 # def get_nav_propic(user):
 #     # navpropic = profile.objects.get(user=user)
@@ -51,7 +51,6 @@ class Feed(generic.ListView):
     model = UserPost
     template_name = 'instagram/feed.html'
     ordering = '-date_published'
-    paginate_by = 7
 
     def get_queryset(self):
         objects = super(Feed,self).get_queryset()

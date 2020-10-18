@@ -28,7 +28,7 @@
                                 </div>
                             </header>
                             <div class="post_option">
-                                <button class="post_option_button">
+                                <button class="post_option_button" data-id="{{post.id}}">
                                     <div class="post_option_div">
                                         <svg aria-label="More options" class="icon" fill="#262626" height="16" viewBox="0 0 48 48" width="16">
                                             <circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle>
@@ -43,22 +43,22 @@
                                     <img class="postimage" src="{{post.image.url}}" alt="Photo by {{ post.uploader }}">
                                 </div>
                             </div>
-                            <div class="pd_post_likecomment">
+                            <div class="pd_post_likecomment" id="pd_post_likecomment_{{post.id}}">
                                 <!-- like comment icon -->
                                 <section class="post_likeicon_section">
                                     <!-- love -->
                                     <span class="love-span">
-                                        <button class="icon-button" id="icon-love">
-                                            <div class="icon-div" id="love-div">
+                                        <button class="icon-button icon-love" data-id={{post.id}}>
+                                            <div class="icon-div" id="love-div-{{post.id}}">
                                                 <span class="love-span2">
                                                     {% if user in post.likes.all %}
-                                                        <svg aria-label="Unlike" id="love" class="icon" fill="#ed4956" height="24" viewBox="0 0 48 48" width="24">
+                                                        <svg aria-label="Unlike" id="love{{post.id}}" class="icon" fill="#ed4956" height="24" viewBox="0 0 48 48" width="24">
                                                             <path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 
                                                             10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 
                                                             7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
                                                         </svg> 
                                                     {% else %}
-                                                        <svg class="icon" id="love" aria-label="Like" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
+                                                        <svg class="icon" id="love{{post.id}}" aria-label="Like" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                                                             <path d="M34.6 6.1c5.7 0 10.4  5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 
                                                             41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 
                                                             1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 
@@ -73,7 +73,7 @@
                                     </span>
                                     <!-- comment -->
                                     <span class="comment-span">
-                                        <button class="icon-button" id="icon-comment">
+                                        <a class="icon-button" href="{% url 'post:post_details' post.slug %}">
                                             <div class="icon-div">
                                                 <svg aria-label="Comment" class="icon" fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                                                     <path clip-rule="evenodd" d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 
@@ -82,7 +82,7 @@
                                                     12.7 44.5 24z" fill-rule="evenodd"></path>
                                                 </svg>
                                             </div>
-                                        </button>
+                                        </a>
                                     </span>
                                     <!-- send -->
                                     <button class="icon-button">
@@ -99,7 +99,7 @@
                                 <!-- who likes it -->
                                 
                                 {% if post.total_likes %}
-                                    <section class="post_likes">
+                                    <section class="post_likes" id="post_likes_{{post.id}}" >
                                         <div class="post_likes_div">
                                             <div class="first_liker_propic_div">
                                                 <div class="first_liker_propic_div2">
@@ -108,7 +108,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="who_likes_it">Liked by <span class="first_liker_span"><a class="first_liker_prolink" href="{% url 'instagram:profile' post.likes.last %}">{{ post.likes.last }}</a></span>{% if post.total_likes|sub:1 %} and <button class="total_liker_button"><span>{{ post.total_likes|sub:1 }}</span> other{{ post.total_likes|sub:1|pluralize }}</button>{% endif %}</div>
+                                            <div class="who_likes_it" id="who_likes_it_{{post.id}}" >Liked by <span class="first_liker_span"><a class="first_liker_prolink" href="{% url 'instagram:profile' post.likes.last %}">{{ post.likes.last }}</a></span>{% if post.total_likes|sub:1 %} and <button class="total_liker_button" id="total_liker_button_{{post.id}}"><span>{{ post.total_likes|sub:1 }}</span> other{{ post.total_likes|sub:1|pluralize }}</button>{% endif %}</div>
                                         </div>
                                     </section>
                                 {% endif %}
@@ -116,7 +116,7 @@
                                 <!-- comment section -->
                                 {% if post.caption or post.comments.count %}
                                     <div class="post_commentsbox">
-                                        <div class="common_comment_class common_comment_class2">
+                                        <div class="common_comment_class common_comment_class2" id="post_comment_box_{{post.id}}" >
                                             {% if post.caption %}
                                                 <div id="comment-div_{{post.id}}" class="common_comment_class common_comment_class2 amb">
                                                     <div class="main_comment_div">
@@ -126,7 +126,7 @@
                                                 </div>
                                             {% endif %}
                                             {% if post.comments.count %}
-                                                <div>
+                                                <div id="main_comment_box{{post.id}}" >
                                                     {% if post.comments.count >= 3 %}
                                                         <div class="common_comment_class common_comment_class2 amb">
                                                             <a class="view_all_comment_link" href="{% url 'post:post_details' post.slug %}">View all <span>{{ post.comments.count }}</span> comments</a>
@@ -161,11 +161,11 @@
                                 <!-- comment box -->
                                 <section class="post_comment_input">
                                     <div class="comment_input_div">
-                                        <form class="comment_input_form" id="comment_form" method="POST">
+                                        <form class="comment_input_form" id="comment_input_form{{post.id}}" data-id="{{ post.id }}" data-t_comment="{{post.comments.count}}" method="POST">
                                             {% csrf_token %}
-                                            <textarea class="comment_textarea" name="comment" id="comment" placeholder="Add a comment..."></textarea>
-                                            <!-- <input type="hidden" name="slug" id="slug" value="{{post.slug}}"> -->
-                                            <button class="comment_post_button" type="submit" disabled>Post</button>
+                                            <textarea class="comment_textarea" id="comment_textarea{{post.id}}" data-id="{{ post.id }}" name="comment" placeholder="Add a comment..."></textarea>
+                                            <input type="hidden" name="slug" value="{{post.slug}}">
+                                            <button class="comment_post_button" id="comment_post_button{{post.id}}" type="submit" disabled>Post</button>
                                         </form>
                                     </div>
                                 </section>
@@ -191,10 +191,8 @@
 {%endblock%}
 {% block js %}
     <script>
-        $(function(){
-            pageactive('home');
-            dropmenu('home');
-            dropmenuhide('home');
-        });
+        const editlikelink = "{% url 'post:edit_like' %}";
+        const addcommentlink = "{% url 'post:add_comment' %}";
     </script>
+    <script src="{% static 'instagram/js/feed.js' %}"></script>
 {% endblock %}

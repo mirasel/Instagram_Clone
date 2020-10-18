@@ -24,6 +24,7 @@ def add_comment(request):
     if request.method == 'POST':
         post_id = request.POST.get('post_id')
         comment = request.POST.get('comment')
+        total_comment = request.POST.get('total_comment')
         user = get_object_or_404(profile,user=request.user)
         post = UserPost.objects.get(pk=post_id)
         post_comment=PostComment.objects.create(post=post,commenter=user,comment=comment)
@@ -32,7 +33,8 @@ def add_comment(request):
                 'name':post_comment.commenter.user.username,
                 'propic':post_comment.commenter.profile_pic.url,
                 'comment':post_comment.comment,
-                'id':post_comment.id
+                'id':post_comment.id,
+                'total_comment':int(total_comment)+1
             }
             return JsonResponse(data)
 
@@ -49,14 +51,14 @@ def edit_like(request):
         post = get_object_or_404(UserPost,pk=post_id)
         if request.GET.get('event') == 'Like':
             post.likes.add(request.user)
-            response = {'button':'Unlike','total_likes':post.total_likes()}
+            response = {'button':'Unlike','total_likes':post.total_likes(),'post_id':post_id}
             if post.total_likes():
                 response['last_liker_name'] = post.likes.last().profiles.first().user.username
                 response['last_liker_propic'] = post.likes.last().profiles.first().profile_pic.url
             return JsonResponse(response)
         else:
             post.likes.remove(request.user)
-            response = {'button':'Like','total_likes':post.total_likes()}
+            response = {'button':'Like','total_likes':post.total_likes(),'post_id':post_id}
             if post.total_likes():
                 response['last_liker_name'] = post.likes.last().profiles.first().user.username
                 response['last_liker_propic'] = post.likes.last().profiles.first().profile_pic.url

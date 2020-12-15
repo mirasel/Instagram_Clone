@@ -25,9 +25,9 @@ SECRET_KEY = 'e#p=t8ourpe1x%vn)huxsw9$ktkm$_uu0*#q*55d7e4a00s%g9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -138,3 +138,11 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'InstagramClone <no-replay@instagramclone.com>'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mirasel280@gmail.com'
+EMAIL_HOST_PASSWORD = 'bnifypyljmkolkoq'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

@@ -1,7 +1,41 @@
+function overlay(insert_button){
+    const common_overlay = `<div class="common_overlay" role="presentation">
+                            <div class="window" id="window" style="z-index:2;"></div>
+                            <div class="common_overlay_div" role="dialog">
+                                <div class="common_overlay_div2">
+                                    <div class="common_overlay_items" >
+                                        ${insert_button}
+                                        <button id="cancel_overlay" class="cancel overlay_button" tabindex="0">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+    return common_overlay;
+}
+
+function canceloverlay(){
+    $('#cancel_overlay').on('click',function(){
+        $('.common_overlay').remove();
+    });
+}
+
+
 $(function(){
     pageactive('home');
     dropmenu('home');
     dropmenuhide('home');
+
+    $('button.post_option_button').on('click',function(){
+        const slug = $(this).data('slug');
+        const gotopost = `<button class="gotopost overlay_button" tabindex="0">Go to post</button>`;
+        const olay = overlay(gotopost);
+        $('body').append(olay);
+        $('.gotopost').click(function(){
+            const cl = window.location;
+            window.location=`${cl}post/${slug}`;
+        });
+        canceloverlay();
+    });
 
     $(".icon-love").on("click",function(e){
         p_id = $(this).data('id');

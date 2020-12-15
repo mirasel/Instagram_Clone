@@ -37,9 +37,7 @@ function comment_option_clicked(){
                 }
             });
         });
-        $('#cancel_overlay').on('click',function(){
-            $('.common_overlay').remove();
-        });
+        canceloverlay()
     });
 }
 
@@ -54,6 +52,12 @@ function comment_option_mouse_events(){
     });
 }
 
+function canceloverlay(){
+    $('#cancel_overlay').on('click',function(){
+        $('.common_overlay').remove();
+    });
+}
+
 $(function(){
     dropmenu('post_details')
     dropmenuhide('post_details')
@@ -62,6 +66,8 @@ $(function(){
     comment_option_mouse_events();
     
     comment_option_clicked();
+
+    canceloverlay();
 
     $('textarea').keyup(function (e) {
         if(e.shiftKey && e.which==13){

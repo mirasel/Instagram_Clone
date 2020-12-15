@@ -31,4 +31,4 @@ Let's look at some of the previews:
 ![GitHub Logo](/Images/emailsent.png)
 
 ## Password reset email
-![GitHub Logo](/Images/resetpasswordemail.png)
+![GitHub Logo](/Images/resetpasswordgmail.png)

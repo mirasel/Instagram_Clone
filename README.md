@@ -1,5 +1,5 @@
 # Instagram Clone
-This is a django web development for cloning the https://www.instagram.com website
+This is a django web development for cloning the https://www.instagram.com website. All the basic functionality of instagram have been cloned in this website. User can upload images, like images, comment on a post, edit his/her profile, change profile picture, reset password etc.
 Let's look at some of the previews:
 
 ## Login
